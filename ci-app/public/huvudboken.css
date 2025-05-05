@@ -1,0 +1,59 @@
+section{
+    margin-left: 7%;
+}
+h1{
+    margin-top:1em;
+    margin-bottom:0.5em;
+}
+h2{
+    margin-top:1em;
+    margin-bottom:0.5em;
+}
+
+.larger{
+    font-size: larger;
+}
+
+.sidfot {
+    position:fixed;bottom:0;left:0;right:0;height:30px;
+  }
+
+td.number {
+    text-align:right;
+}
+  /*
+DIV holders for info, success, warning, error and validation messages
+*/
+.info, .success, .warning, .error, .errors, .validation {
+    border: 1px solid;
+    margin: 10px 0px;
+    padding:15px 10px 15px 50px;
+    background-repeat: no-repeat;
+    background-position: 10px center;
+}
+.info {
+    color: #00529B;
+    background-color: #BDE5F8;
+    /* background-image: url('../images/info.png'); */
+}
+.success {
+    color: #4F8A10;
+    background-color: #DFF2BF;
+    /* background-image:url('../images/success.png'); */
+}
+
+.warning {
+    color: #9F6000;
+    background-color: #FEEFB3;
+    /*  background-image: url('../images/warning.png'); */
+}
+.error {
+    color: #D8000C;
+    background-color: #FFBABA;
+    /*  background-image: url('../images/error.png'); */
+}
+.errors {
+    color: #D8000C;
+    background-color: #FFBABA;
+    /*  background-image: url('../images/error.png'); */
+}
