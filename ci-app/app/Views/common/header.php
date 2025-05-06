@@ -8,8 +8,10 @@
     $description ?>">
     <!--    <link rel="stylesheet" href="/mini.css">-->
     <meta name="color-scheme" content="light dark">
-    <link rel="stylesheet" href="/huvudboken.css">
+
     <link rel="stylesheet" href="/pico/pico.min.css">
+<!--    <link rel="stylesheet" href="/pico/pico.colors.min.css">-->
+    <link rel="stylesheet" href="/huvudboken.css">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/png" href="/favicon.ico"/>
@@ -18,7 +20,8 @@
 
 </head>
 <body>
-<?php
+<header>
+    <?php
 helper('jsi_helper');
 
 $session = \Config\Services::session();
@@ -29,8 +32,8 @@ if ($errors != NULL) {
     }
 }
 if ($errors != NULL) {
-    echo('<article class="error">');
-    echo('<ul>');
+    echo('<article>');
+    echo('<ul class="error">');
     foreach ($errors as $field => $text) {
         echo('<li>' . $text . '</li>');
     }
@@ -41,8 +44,8 @@ if ($errors != NULL) {
 
 $infos = $session->getFlashdata('info');
 if ($infos != NULL) {
-    echo('<article class="info">');
-    echo('<ul>');
+    echo('<article>');
+    echo('<ul class="info">');
     foreach ($infos as $field => $text) {
         echo('<li>' . $text . '</li>');
     }
@@ -52,8 +55,8 @@ if ($infos != NULL) {
 
 $warnings = $session->getFlashdata('warning');
 if ($warnings != NULL) {
-    echo('<article class="warning">');
-    echo('<ul>');
+    echo('<article>');
+    echo('<ul class="warning">');
     foreach ($warnings as $field => $text) {
         echo('<li>' . $text . '</li>');
     }
@@ -65,7 +68,7 @@ $home_caption = "huvudboken.se";
 
 ?>
 
-<header>
+
     <nav>
         <ul>
             <?= !$session->has('userID') ? '<li><h1><a class="contrast" href="/">' . $home_caption . '</a></h1></li>' : "" ?>

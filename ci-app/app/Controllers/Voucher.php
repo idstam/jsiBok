@@ -137,6 +137,10 @@ class Voucher extends BaseController
         if ($this->session->get('userID') == null) {
             return redirect()->to('/');
         }
+        if ($this->session->get('companyName') == null) {
+            return redirect()->to('/company');
+        }
+
         $companyID = $this->session->get('companyID');
         
         if (! $voucher instanceof \App\Entities\VoucherEntity){

@@ -8,6 +8,8 @@ use CodeIgniter\Entity\Entity;
  * @property float|int|object|string|null $amount
  * @property int|null $account_id
  * @property int|null $company_id
+ * @property int|null $cost_center_id
+ * @property int|null $project_id
  */
 class VoucherRowEntity extends Entity
 {

@@ -37,23 +37,30 @@ if (!function_exists('ensure_date')) {
      * Return a date without time from the parameter that can de a DateTime ocr a string: Y-m-d / Ymd
      * Return format is Ymd
      *
-     * @param string|DateTime $date
+     * @param DateTime|string $date
      * @return DateTime
      */
-    function ensure_date($date, $format = 'Ymd'): DateTime
+    function ensure_date(DateTime|string $date, string $format = 'Ymd'): DateTime
     {
+
         if ($date instanceof DateTime) {
-            $date = $date->format($format);
+            $date->settime(0,0);
+            return $date;
         }
+
         $ret = date_create_from_format($format, $date);
         if (!$ret) {
-            $ret = date_create_from_format('Y-m-d', substr($date, 0, 10));
+            $ret = date_create_from_format('Y-m-d',substr($date, 0, 10));
+        }
+
+        if (!$ret) {
+            $ret = date_create_from_format('Ymd',substr($date, 0, 8));
         }
         $ret->settime(0,0);
         return $ret;
     }
 
-    function ensure_date_string($date, $format = 'Ymd'): string
+    function ensure_date_string(DateTime|string $date, string $format = 'Ymd'): string
     {
         $date = ensure_date($date, $format);
         return $date->format($format);

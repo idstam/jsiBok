@@ -14,6 +14,7 @@ use CodeIgniter\Entity\Entity;
  * @property string|null $serie
  * @property string $source
  * @property array|null $rows
+ * @property string|null $external_reference
  */
 class VoucherEntity extends Entity
 {

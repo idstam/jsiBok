@@ -25,7 +25,7 @@ echo('</datalist>');
         <div class="grid">
         <input class="tertiary" type="submit" id="use_template" name="use_template" value="Använd"/>
 
-        <strong><a  href="/vouchtemplate/new">Ny&nbsp;mall</a></strong>
+        <strong><a  href="/voucher-template/new">Ny&nbsp;mall</a></strong>
         </div>
     </fieldset>
 </form>
