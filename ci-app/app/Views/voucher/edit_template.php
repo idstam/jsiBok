@@ -40,9 +40,7 @@ echo('</datalist>');
 ?>
 
 
-<form class="container" action="/voucher/save" method="post">
-
-
+<form class="container" action="/voucher-template/save" method="post">
 
     <?= csrf_field() ?>
     <fieldset>
