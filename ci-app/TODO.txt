@@ -4,64 +4,12 @@
 Bug
         //TODO: Get year start and end from voucher and make sure the booking year is still open. VoucherEntiry public function Validate()
         //TODO: DO not show the regret button for a closed year.
-    Kopiera in kontoplan vid nytt företag utan SIE
-
-Innan jag kan använda det för egna bolag, men online
-    https://github.com/brick/money
-
-    Momsrapport
-    Kunna använda mallar
-
-    Ny about
 
 
-Innan jag släpper på någon annan
-    Fixa ordentligt gitrepo. codeberg eller github
-    Spinner vid sie-import
-    En snygg header till rapporter
-    Förra året som jämförelsetal i resultat- och balansräkning.
-    SIE-Export
-    Tipsruta
-    Visa journal
-    Ta bort företag i välj-listan
-
-
-    Hantera kontonamn vid SIE-import
-
-    Kostnadsställen
-        Vouchers: Done
-        Register
-        Filter i rapporter
-    Projekt
-        Vouchers: Done
-        Register
-        Filter i rapporter
-
-    Flytta UB till IB   (plus)
-    Uppgradera konto till "plus" [bas, plus, premium]
-    flera användare per företag (plus)
-    Visa/ändra företagsinfomation
-    Hantera verifikationsserier
-
-    Registrera IB
-    Rapport IB ?
-
-
-    Cache kontoplan?
-    Visa omslutning och differens vid kontering
-    Rapport Verifikationslista
-    Epostverifiering efter skapande av användare. innan inloggning.  Eller inte. Kanske radera oanvända konton efter x månader
-    Aktiva/passiva kontot så att jag inte behöver skyffla runt hela kontoplanen
 
 Resten
-    Svenska översättningar av standardtexter
-    Fyll i förslag till datum för nytt bokföringsår
-    Kollapsa "nytt bokföringsår" i company settings
-    Kundreskontra   (bas)
-    Leverantörsreskontra (bas)
 
-    Skapa kundfaktura (plus)
-    Artikelregister (plus)
+https://codeberg.org/idstam/jsiBok
 
     Skicka faktura med e-post (plus)
     E-faktura               (plus)
@@ -79,37 +27,8 @@ Resten
     Grafisk logga på utgående fakturor (premium)
 
 
-DONE
-    Kopiera BASkontoplan till företag. Detta behövs inte eftersom vi aktiverar konton varefter de används.
-    Lägg till verifikationsserie vid nytt företag
-    Byta företag
-    Kunna registrera Verifikat
-    En journal
-    Ångra verifikat
-    Skapa error@huvudboken.se och info@huvudboken.se
-    Ny Mailgun mg.huvudboken.se
-    Ny Slack: huvudboken
-    Aktivera konton vid sie-import
-    Rapport Balansräkning
-    Rapport Resultaträkning
-    Rapport Huvudbok
-        Hela året eller enstaka månader
-    Domännamn? -> huvudboken.se
-    Momskod och SRU i egen tabell
-    Snygga till drop-downs till rapportvalen (ta bort tiden från års/valet
-    Byta bokföringsår
-    Sätt bokföringsår i session
-    Sätt rätt bokföringsår i Journalen
-    Aktivera konton som används när man bokför
-    Kontrollera org-no vid SIE-import
-    Make a log handler that ships to Slack
-    Journal om sie-import
-    Dubbelkolla att användare inte kan se varandras data
-    Setting for allowing registration of accounts
-        Verifikationslista
-    Ta bort nollposter från huvudbok.
 
-
+https://github.com/brick/money
 https://github.com/Pixelrobin/php-feather
 https://feathericons.com/
 https://minicss.us/docs.htm    
