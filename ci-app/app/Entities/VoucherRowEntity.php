@@ -43,5 +43,15 @@ class VoucherRowEntity extends Entity
         }
     }
 
-    
+    public function setTemplateAmountFromPost(string $debet,string $kredit){
+        if($debet != '' && $debet != '0' && $debet !== null){
+            $this->attributes['debet_amount'] = $debet;
+            return;
+        }
+        if($kredit != '' && $kredit != '0' && $kredit !== null){
+            $this->attributes['kredit_amount'] = $kredit;
+            return;
+        }
+    }
+
 }

@@ -51,7 +51,7 @@ class VoucherTemplateModel extends Model
     {
         $template->id = -1;
 
-        $template->Validate();
+        $template->ValidateTemplate();
         if(count($template->validationErrors) > 0){
             return $template;
         }
