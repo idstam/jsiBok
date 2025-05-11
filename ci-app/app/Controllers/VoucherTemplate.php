@@ -5,7 +5,7 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
 
-class Vouchtemplate extends BaseController
+class VoucherTemplate extends BaseController
 {
     public function getIndex()
     {
@@ -42,14 +42,14 @@ class Vouchtemplate extends BaseController
         }
         $data['values'] = $values;
         $data["voucher"] = new \App\Entities\VoucherEntity();
-        echo view('common/header', $data);
-        echo view("voucher/edit_voucher", $data);
-        echo view('common/footer', $data);
+        return view('common/header', $data) .
+            view("voucher/edit_voucher", $data) .
+            view('common/footer', $data);
 
     }
     public function getNew()
     {
-        if($this->session->get('userID') == null){
+        if ($this->session->get('userID') == null) {
             return redirect()->to('/');
         }
         if ($this->session->get('companyName') == null) {
@@ -88,8 +88,59 @@ class Vouchtemplate extends BaseController
 
     }
 
-    public function postNew()
+    public function postSave()
     {
+        if ($this->session->get('userID') == null) {
+            return redirect()->to('/');
+        }
+
+        $t = new \App\Entities\VoucherEntity();
+        $t->voucher_date = ensure_date($this->request->getPost("vdate"));
+        $t->title = $this->request->getPost("vtitle");
+        $t->serie = $this->request->getPost("vserie");
+        $t->company_id  = $this->session->get('companyID');
+        $t->user_id  = $this->session->get('userID');
+        $t->external_reference  = '';
+        $rows = [];
+        $rowNo = 0;
+
+        while (true) {
+
+            if ($this->request->getPost("vr_account-" . $rowNo) !== null) {
+                $tr = new \App\Entities\VoucherRowEntity();
+                $tr->company_id  = $this->session->get('companyID');
+                $tr->account_id = $this->request->getPost("vr_account-" . $rowNo);
+                $tr->cost_center_id = $this->request->getPost("vr_costcenter-" . $rowNo);
+                $tr->project_id = $this->request->getPost("vr_project-" . $rowNo);
+                $tr->setAmountFromPost($this->request->getPost("vr_debet-" . $rowNo), $this->request->getPost("vr_kredit-" . $rowNo));
+                $rows[$rowNo] = $tr;
+                $rowNo += 1;
+
+            } else {
+                break;
+            }
+        }
+
+        $t->rows = $rows;
+
+        $tm = model('App\Models\VoucherTemplateModel');
+
+        $t = $tm->Add($t);
+
+        if ($t->id !== -1) {
+            $this->journal->Write('Ny mall', "$t->title");
+            return $this->getSaved($t);
+        } else {
+            $errCount = 0;
+            foreach ($t->validationErrors as $e) {
+                $errCount++;
+                $this->session->setFlashdata('errors', array("VoucherValidationError$errCount" => $e));
+            }
+            return $this->getIndex($t);
+        }
+
+
 
     }
+
 }
