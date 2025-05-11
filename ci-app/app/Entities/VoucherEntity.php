@@ -45,8 +45,6 @@ class VoucherEntity extends Entity
     {
         helper('jsi_helper');
 
-        //TODO:Schedule Vouchers for the future.
-
         $this->validationErrors = [];
         $voucherDate = $this->attributes['voucher_date'];
         $bookingYearStart = $this->attributes['booking_year_start'];
@@ -146,4 +144,39 @@ class VoucherEntity extends Entity
         }
         $this->attributes['rows'] = $rows;
     }
+    public function ValidateTemplate(): array
+    {
+        helper('jsi_helper');
+
+        $this->validationErrors = [];
+
+        //There should be at least two rows.
+        if (count($this->attributes['rows']) < 2) {
+            array_push($this->validationErrors, "Det behövs minst två rader får att få ihop ett verifikat.");
+        }
+        //The amounts of all rows should sum to zero
+//        $sum = 0;
+//        foreach ($this->attributes['rows'] as $row) {
+//            $sum = bcadd($sum, $row->amount, 2);
+//        }
+//        if (bccomp($sum, "0", 2) !== 0) {
+//            array_push($this->validationErrors, "Verifikatet är inte i balans. Diff: $sum");
+//        }
+
+        //Serie should be set to a non empty string
+        if ($this->attributes['serie'] == "") {
+            array_push($this->validationErrors, "Serie saknas.");
+        }
+//        //Source should be set to a non empty string
+//        if ($this->attributes['source'] == "") {
+//            array_push($this->validationErrors, "Källa saknas. (internt programfel)");
+//        }
+        //Title should be set to a non empty string
+        if ($this->attributes['title'] == "") {
+            array_push($this->validationErrors, "Rubrik saknas.");
+        }
+
+        return $this->validationErrors;
+    }
+
 }

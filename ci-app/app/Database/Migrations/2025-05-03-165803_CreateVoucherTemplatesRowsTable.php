@@ -36,7 +36,11 @@ class CreateVoucherTemplatesRowsTable extends Migration
                 'unsigned'       => true,
                 'null'        => true,
             ],
-            'amount'       => [
+            'debet_amount'       => [
+                'type'       => 'VARCHAR',
+                'constraint' => '50',
+            ],
+            'kredit_amount'       => [
                 'type'       => 'VARCHAR',
                 'constraint' => '50',
             ],

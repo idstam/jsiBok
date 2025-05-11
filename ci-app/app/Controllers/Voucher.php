@@ -79,6 +79,9 @@ class Voucher extends BaseController
         if ($this->session->get('userID') == null) {
             return redirect()->to('/');
         }
+        if ($this->session->get('companyName') == null) {
+            return redirect()->to('/company');
+        }
 
         $v = new \App\Entities\VoucherEntity();
         $v->voucher_date = ensure_date($this->request->getPost("vdate"));
