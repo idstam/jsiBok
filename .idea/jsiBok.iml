@@ -6,6 +6,9 @@
       <sourceFolder url="file://$MODULE_DIR$/ci-app/app/Config" isTestSource="false" packagePrefix="Config\" />
       <sourceFolder url="file://$MODULE_DIR$/ci-app/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/ci-app/tests/_support" isTestSource="true" packagePrefix="Tests\Support\" />
+      <sourceFolder url="file://$MODULE_DIR$/ci-app/app" isTestSource="false" packagePrefix="App\" />
+      <sourceFolder url="file://$MODULE_DIR$/ci-app/app/Config" isTestSource="false" packagePrefix="Config\" />
+      <sourceFolder url="file://$MODULE_DIR$/ci-app/tests/_support" isTestSource="true" packagePrefix="Tests\Support\" />
       <excludeFolder url="file://$MODULE_DIR$/ci-app/vendor/fakerphp/faker" />
       <excludeFolder url="file://$MODULE_DIR$/ci-app/vendor/mikey179/vfsstream" />
       <excludeFolder url="file://$MODULE_DIR$/ci-app/vendor/myclabs/deep-copy" />
