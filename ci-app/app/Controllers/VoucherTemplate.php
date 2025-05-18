@@ -5,7 +5,7 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
 
-class Vouchtemplate extends BaseController
+class VoucherTemplate extends BaseController
 {
     public function getIndex()
     {
@@ -88,7 +88,7 @@ class Vouchtemplate extends BaseController
 
     }
 
-    public function postNew()
+    public function postSave    ()
     {
         if ($this->session->get('userID') == null) {
             return redirect()->to('/');
@@ -97,7 +97,7 @@ class Vouchtemplate extends BaseController
             return redirect()->to('/company');
         }
 
-        $t = new \App\Entities\VoucherEntity();
+        $t = new \App\Entities\VoucherTemplateEntity();
         $t->title = $this->request->getPost("vtitle");
         $t->serie = $this->request->getPost("vserie");
         $t->company_id  = $this->session->get('companyID');
@@ -107,7 +107,7 @@ class Vouchtemplate extends BaseController
         while (true) {
 
             if ($this->request->getPost("vr_account-" . $rowNo) !== null) {
-                $tr = new \App\Entities\VoucherRowEntity();
+                $tr = new \App\Entities\VoucherTemplateRowEntity();
                 $tr->company_id  = $this->session->get('companyID');
                 $tr->account_id = $this->request->getPost("vr_account-" . $rowNo);
                 $tr->cost_center_id = $this->request->getPost("vr_costcenter-" . $rowNo);
@@ -127,8 +127,9 @@ class Vouchtemplate extends BaseController
         $t = $tm->Add($t);
 
         if ($t->id !== -1) {
+
             $this->journal->Write('Ny bokföringsmall', "$t->title");
-            return $this->getSaved($t);
+            return redirect()->to('/voucher');
         } else {
             $errCount = 0;
             foreach ($t->validationErrors as $e) {
@@ -141,4 +142,44 @@ class Vouchtemplate extends BaseController
 
 
     }
+
+    public function getSaved($template = null) {
+        if ($this->session->get('userID') == null) {
+            return redirect()->to('/');
+        }
+        if ($this->session->get('companyName') == null) {
+            return redirect()->to('/company');
+        }
+
+        $companyID = $this->session->get('companyID');
+
+        if (! $template instanceof \App\Entities\VoucherEntity){
+            if(is_string($template)) {
+                $tmp = $template;
+                $tm = model('App\Models\VoucherTemplateModel');
+                $template = $tm->GetByNumber($companyID, $tmp);
+                if ($template === null) {
+                    $this->session->setFlashdata('errors', array("Okänd mall" => 'Okänt verifikationsnummer: ' . esc($tmp)));
+                    return redirect()->to('/voucher-template');
+                }
+            }
+        }
+
+
+        $data = [];
+        $data['title'] = 'Bokföringsmall';
+        $data['description'] = '';
+        //$data['page_header'] = 'Senaste verifikatet för ' . $this->session->get('companyName');
+
+
+        $data["voucher"] = $template;
+
+
+
+        echo view('common/header', $data);
+        echo view("voucher/edit_template", $data);
+        echo view('common/footer', $data);
+
+    }
+
 }

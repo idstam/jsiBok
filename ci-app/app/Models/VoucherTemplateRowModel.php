@@ -12,7 +12,7 @@ class VoucherTemplateRowModel extends Model
     protected $returnType       = 'object';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['voucher_id', 'company_id', 'account_id', 'cost_center_id', 'project_id', 'debet_amount', 'kredit_amount'];
+    protected $allowedFields    = ['template_id', 'company_id', 'account_id', 'cost_center_id', 'project_id', 'debet_amount', 'kredit_amount'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;

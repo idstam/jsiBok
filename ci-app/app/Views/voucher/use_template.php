@@ -1,13 +1,5 @@
 <?php
 /** @var array $voucher_templates */
-
-echo('<datalist id="dl_templates">');
-
-foreach ($voucher_templates as $template) {
-    echo('<option label="' . esc($template[0]) . '" value="' . esc($template[1]) . '" ></option>');
-}
-echo('</datalist>');
-
 ?>
 
 <form class="container" action="/voucher/use_template" method="post">
@@ -15,9 +7,12 @@ echo('</datalist>');
     <fieldset>
         <legend><strong>Använd mall</strong></legend>
         <div class="grid">
-        <label for="vtitle">Namn
-        <input list="dl_templates" id="tname" name="tname" size="15"
-               style="padding: calc(var(--universal-padding) / 2);"/></label>
+        <label for="tname">Namn
+        <select id="tname" name="tname" style="padding: calc(var(--universal-padding) / 2);">
+            <?php foreach ($voucher_templates as $template): ?>
+                <option value="<?= esc($template[1]) ?>"><?= esc($template[0]) ?></option>
+            <?php endforeach; ?>
+        </select></label>
         <label for="vdate">Belopp
         <input type="text" id="tamount" name="tamount" size="15"
                style="padding: calc(var(--universal-padding) / 2);"/></label>

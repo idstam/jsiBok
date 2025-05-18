@@ -31,10 +31,6 @@ class CreateVoucherTemplatesTable extends Migration
                 'constraint' => '500',
                 'null'        => true,
             ],
-            'source'       => [
-                'type'       => 'VARCHAR',
-                'constraint' => '250',
-            ],
             'created_at'       => [
                 'type'       => 'DATETIME',
                 'null'        => true,

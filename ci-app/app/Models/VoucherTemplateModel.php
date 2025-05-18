@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Entities\VoucherTemplateEntity;
 use CodeIgniter\Model;
 use CodeIgniter\Database\Exceptions\DatabaseException;
 use App\Entities\VoucherEntity;
@@ -15,7 +16,7 @@ class VoucherTemplateModel extends Model
     protected $returnType       = 'object';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['company_id', 'title', 'serie', 'external_reference', 'source'];
+    protected $allowedFields    = ['company_id', 'title', 'serie', 'external_reference'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
@@ -47,7 +48,7 @@ class VoucherTemplateModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function Add($template)
+    public function Add(VoucherTemplateEntity $template)
     {
         $template->id = -1;
 
@@ -84,8 +85,8 @@ class VoucherTemplateModel extends Model
 
             //Save the template
             $this->insert($template);
-            $voucherID = $this->getInsertID();
-            $template->SetID($voucherID);
+            $templateID = $this->getInsertID();
+            $template->SetID($templateID);
 
             //Save rows
             $trm = model('App\Models\VoucherTemplateRowModel');
@@ -93,7 +94,9 @@ class VoucherTemplateModel extends Model
 
             $this->db->transComplete();
         } catch (DatabaseException $e) {
+            $this->db->transRollback();
             $template->validationErrors = ['Ett oväntat fel uppstod när vi försökte spara mallen till databasen. Loggen är skickad till supporten.'];
+            //dd($template);
             return $template;
         }
 

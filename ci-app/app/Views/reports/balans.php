@@ -17,7 +17,7 @@ $ut_amount_sum2 = '0';
 
 function format_bc($number): string
 {
-    $number = new BcMath\Number($number)->round(0, RoundingMode::HalfEven);
+    $number = (new BcMath\Number($number))->round(0, RoundingMode::HalfEven);
     $tokens = str_split(strrev($number), 3);
     $ret = join(' ', $tokens);
     $ret = strrev($ret);
