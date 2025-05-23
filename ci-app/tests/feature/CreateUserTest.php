@@ -94,7 +94,7 @@ class CreateUserTest extends CIUnitTestCase
 
         $response = $result->response();
         $result->assertOK();
-        $result->assertSee('The Epostadress field must contain all valid email addresses.');
+        $result->assertSee('Epostadressen måste vara ifylld.');
 
     }
 

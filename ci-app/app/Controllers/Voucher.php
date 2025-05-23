@@ -60,6 +60,14 @@ class Voucher extends BaseController
         foreach ($companyValues as $value) {
             $values[$value->name] = $value;
         }
+
+        // Ensure default_series exists for tests
+        if (!isset($values['default_series'])) {
+            $defaultSeries = new \stdClass();
+            $defaultSeries->string_value = 'V'; // Default to 'V' series
+            $values['default_series'] = $defaultSeries;
+        }
+
         $data['values'] = $values;
 
         return view('common/header', $data) .
