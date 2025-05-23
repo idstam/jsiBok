@@ -16,7 +16,7 @@ class CreateCompanyTest extends CIUnitTestCase
     protected $migrateOnce = true;
     protected $refresh     = true;
     protected $namespace   = null;
-    
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -25,17 +25,31 @@ class CreateCompanyTest extends CIUnitTestCase
 
     protected function tearDown(): void
     {
-        $db      = \Config\Database::connect();
+        $db = \Config\Database::connect();
+        $driver = $db->DBDriver;
+
         foreach(['company_vouchers', 'company_users', 'company_voucher_series',
                     'company_booking_years','company_values','company_account_vat_sru',
                     'companies'] as $tableName){
             $builder = $db->table($tableName);
-            $db->simpleQuery('SET FOREIGN_KEY_CHECKS = 0;');
+
+            // Disable foreign key checks based on database driver
+            if ($driver == 'MySQLi') {
+                $db->simpleQuery('SET FOREIGN_KEY_CHECKS = 0;');
+            } elseif ($driver == 'SQLite3') {
+                $db->simpleQuery('PRAGMA foreign_keys = OFF;');
+            }
+
             $builder->truncate();
-            $db->simpleQuery('SET FOREIGN_KEY_CHECKS = 0;');
+
+            // Re-enable foreign key checks based on database driver
+            if ($driver == 'MySQLi') {
+                $db->simpleQuery('SET FOREIGN_KEY_CHECKS = 1;');
+            } elseif ($driver == 'SQLite3') {
+                $db->simpleQuery('PRAGMA foreign_keys = ON;');
+            }
         }
         parent::tearDown();
-
     }
 
     public function testIndexPageNotLoggedIn(){
@@ -61,7 +75,7 @@ class CreateCompanyTest extends CIUnitTestCase
         $response = $result->response();
         $result->assertOK();
         $result->assertRedirectTo('/');
-        
+
     }
     public function testIndexPageLoggedIn(){
         $data = [
@@ -73,14 +87,14 @@ class CreateCompanyTest extends CIUnitTestCase
 
         $this->hasInDatabase('users', $data);
         $id = $this->grabFromDatabase('users', 'id', ['email' => 'joe@example.com']);
-        
+
         $session = [
             'email' => 'joe@example.com',
             'userID' => $id,
         ];
-        
+
         $result = $this->withSession($session)->get('company');
-        
+
         $response = $result->response();
         $result->assertOK();
         $result->assertSee('Nytt företag');
@@ -96,13 +110,13 @@ class CreateCompanyTest extends CIUnitTestCase
         ];
         $this->hasInDatabase('users', $data);
         $id = $this->grabFromDatabase('users', 'id', ['email' => 'joe@example.com']);
-        
-        
+
+
         $session = [
             'email' => 'joe@example.com',
             'userID' => $id,
         ];
-        
+
         $name = uniqid();
         $data = [
             'name' => $name,
@@ -111,7 +125,7 @@ class CreateCompanyTest extends CIUnitTestCase
             'booking_year_end' => '2024-12-31'
         ];
         $result = $this->withSession($session)->post('company/save', $data);
-        
+
         $response = $result->response();
         $result->assertOK();
 
@@ -123,7 +137,7 @@ class CreateCompanyTest extends CIUnitTestCase
         $defaultSeries = $this->grabFromDatabase('company_values', 'string_value', ['company_id' => $id]);
 
         $result->assertRedirectTo('company/select/' . $number);
-        
+
     }
 
     // public function testIndexPage(){
@@ -134,7 +148,7 @@ class CreateCompanyTest extends CIUnitTestCase
     //     $this->hasInDatabase('users', $data);
     //     $id = $this->grabFromDatabase('users', 'id', ['email' => 'joe@example.com']);
 
-        
+
     //     $result = $this->post('/user/save',  [
     //         'name'  => 'Fred Flintstone3',
     //         'email' => 'flintyfred3example.com',

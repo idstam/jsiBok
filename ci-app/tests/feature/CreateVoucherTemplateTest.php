@@ -26,14 +26,28 @@ class CreateVoucherTemplateTest extends CIUnitTestCase
     protected function tearDown(): void
     {
         $db = \Config\Database::connect();
+        $driver = $db->DBDriver;
+
         foreach (['company_voucher_template_rows', 'company_voucher_templates', 'company_users',
                      'company_voucher_series', 'company_booking_years', 'company_values',
                      'company_account_vat_sru', 'company_booking_accounts', 'companies'] as $tableName) {
             $builder = $db->table($tableName);
             try {
-                $db->simpleQuery('SET FOREIGN_KEY_CHECKS = 0;');
+                // Disable foreign key checks based on database driver
+                if ($driver == 'MySQLi') {
+                    $db->simpleQuery('SET FOREIGN_KEY_CHECKS = 0;');
+                } elseif ($driver == 'SQLite3') {
+                    $db->simpleQuery('PRAGMA foreign_keys = OFF;');
+                }
+
                 $builder->truncate();
-                $db->simpleQuery('SET FOREIGN_KEY_CHECKS = 1;');
+
+                // Re-enable foreign key checks based on database driver
+                if ($driver == 'MySQLi') {
+                    $db->simpleQuery('SET FOREIGN_KEY_CHECKS = 1;');
+                } elseif ($driver == 'SQLite3') {
+                    $db->simpleQuery('PRAGMA foreign_keys = ON;');
+                }
             } catch (\Exception $e) {
                 d($e);
                 dd($tableName);
