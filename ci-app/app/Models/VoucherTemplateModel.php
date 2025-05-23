@@ -90,6 +90,8 @@ class VoucherTemplateModel extends Model
 
             //Save rows
             $trm = model('App\Models\VoucherTemplateRowModel');
+
+
             $trm->insertBatch($template->rows);
 
             $this->db->transComplete();
