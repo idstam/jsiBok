@@ -29,7 +29,7 @@ final class HuvudbokReportTest extends CIUnitTestCase
     protected function tearDown(): void
     {
         $db = \Config\Database::connect();
-        $dbDriver = $db->DBDriver;
+        $driver = $db->DBDriver;
 
         foreach(['company_account_balance', 'company_voucher_rows', 'company_vouchers',
                     'company_users', 'company_voucher_series', 'company_booking_years',
@@ -37,18 +37,20 @@ final class HuvudbokReportTest extends CIUnitTestCase
                     'companies'] as $tableName){
             $builder = $db->table($tableName);
             try {
-                // Handle different database drivers
-                if ($dbDriver === 'MySQLi') {
+                // Disable foreign key checks based on database driver
+                if ($driver == 'MySQLi') {
                     $db->simpleQuery('SET FOREIGN_KEY_CHECKS = 0;');
-                    $builder->truncate();
-                    $db->simpleQuery('SET FOREIGN_KEY_CHECKS = 1;');
-                } elseif ($dbDriver === 'SQLite3') {
+                } elseif ($driver == 'SQLite3') {
                     $db->simpleQuery('PRAGMA foreign_keys = OFF;');
-                    $builder->truncate();
+                }
+
+                $builder->truncate();
+
+                // Re-enable foreign key checks based on database driver
+                if ($driver == 'MySQLi') {
+                    $db->simpleQuery('SET FOREIGN_KEY_CHECKS = 1;');
+                } elseif ($driver == 'SQLite3') {
                     $db->simpleQuery('PRAGMA foreign_keys = ON;');
-                } else {
-                    // For other database drivers, just try truncate
-                    $builder->truncate();
                 }
             } catch (\Exception $e) {
                 d($e);
@@ -56,6 +58,7 @@ final class HuvudbokReportTest extends CIUnitTestCase
             }
         }
         parent::tearDown();
+
     }
     protected $companyName = '';
     protected $companyID;

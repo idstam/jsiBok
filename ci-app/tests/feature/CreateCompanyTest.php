@@ -16,7 +16,7 @@ class CreateCompanyTest extends CIUnitTestCase
     protected $migrateOnce = true;
     protected $refresh     = true;
     protected $namespace   = null;
-
+    
     protected function setUp(): void
     {
         parent::setUp();
@@ -52,6 +52,7 @@ class CreateCompanyTest extends CIUnitTestCase
             }
         }
         parent::tearDown();
+
     }
 
     public function testIndexPageNotLoggedIn(){
@@ -77,7 +78,7 @@ class CreateCompanyTest extends CIUnitTestCase
         $response = $result->response();
         $result->assertOK();
         $result->assertRedirectTo('/');
-
+        
     }
     public function testIndexPageLoggedIn(){
         $data = [
@@ -89,14 +90,14 @@ class CreateCompanyTest extends CIUnitTestCase
 
         $this->hasInDatabase('users', $data);
         $id = $this->grabFromDatabase('users', 'id', ['email' => 'joe@example.com']);
-
+        
         $session = [
             'email' => 'joe@example.com',
             'userID' => $id,
         ];
-
+        
         $result = $this->withSession($session)->get('company');
-
+        
         $response = $result->response();
         $result->assertOK();
         $result->assertSee('Nytt företag');
@@ -112,13 +113,13 @@ class CreateCompanyTest extends CIUnitTestCase
         ];
         $this->hasInDatabase('users', $data);
         $id = $this->grabFromDatabase('users', 'id', ['email' => 'joe@example.com']);
-
-
+        
+        
         $session = [
             'email' => 'joe@example.com',
             'userID' => $id,
         ];
-
+        
         $name = uniqid();
         $data = [
             'name' => $name,
@@ -127,7 +128,7 @@ class CreateCompanyTest extends CIUnitTestCase
             'booking_year_end' => '2024-12-31'
         ];
         $result = $this->withSession($session)->post('company/save', $data);
-
+        
         $response = $result->response();
         $result->assertOK();
 
@@ -139,7 +140,7 @@ class CreateCompanyTest extends CIUnitTestCase
         $defaultSeries = $this->grabFromDatabase('company_values', 'string_value', ['company_id' => $id]);
 
         $result->assertRedirectTo('company/select/' . $number);
-
+        
     }
 
     // public function testIndexPage(){
@@ -150,7 +151,7 @@ class CreateCompanyTest extends CIUnitTestCase
     //     $this->hasInDatabase('users', $data);
     //     $id = $this->grabFromDatabase('users', 'id', ['email' => 'joe@example.com']);
 
-
+        
     //     $result = $this->post('/user/save',  [
     //         'name'  => 'Fred Flintstone3',
     //         'email' => 'flintyfred3example.com',
