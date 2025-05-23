@@ -90,7 +90,7 @@ final class SieImportTest extends CIUnitTestCase
     public function testBrokenYear(): void
     {
         $this->setupUser();
-        $this->session['sieTempFile'] = 'writable/uploads/TEST_BROKEN_YEAR.sie';
+        $this->session['sieTempFile'] = 'tests/test_data/TEST_BROKEN_YEAR.sie';
 
         $data = [
             'sie_rar-0' => '1',

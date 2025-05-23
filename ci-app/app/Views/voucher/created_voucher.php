@@ -1,13 +1,15 @@
 <?php
 /** @var object $voucher */
-function format_bc($number): string
-{
-    $tokens = str_split(strrev($number), 3);
-    $ret = join(' ', $tokens);
-    $ret = strrev($ret);
-    $ret = str_replace(' .', ',', $ret);
-    $ret = str_replace(' ', '&nbsp;', $ret);
-    return $ret;
+if(!function_exists("format_bc")) {
+    function format_bc($number): string
+    {
+        $tokens = str_split(strrev($number), 3);
+        $ret = join(' ', $tokens);
+        $ret = strrev($ret);
+        $ret = str_replace(' .', ',', $ret);
+        $ret = str_replace(' ', '&nbsp;', $ret);
+        return $ret;
+    }
 }
 ?>
 

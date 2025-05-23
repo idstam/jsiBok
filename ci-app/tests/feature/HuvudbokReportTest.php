@@ -87,36 +87,5 @@ final class HuvudbokReportTest extends CIUnitTestCase
     }
 
 
-    public function testModelHuvudbok(): void
-    {
-        $this->setupUser();
-        $this->session['sieTempFile'] = 'writable/uploads/TEST_BROKEN_YEAR.sie';
-
-        $data = [
-            'sie_rar-0' => '1',
-            'sie_serie-#' => 'V',
-            'sie_serie-A' => 'V',
-            'sie_serie-F' => 'V',
-            'sie_serie-I' => 'V',
-            'sie_serie-L' => 'V',
-            'sie_serie-U' => 'V',
-        ];
-
-        $result = $this->withSession($this->session)->post('sie/import', $data);
-
-
-
-
-
-        // Get every row created by ExampleSeeder
-        $model = new \App\Models\ReportsModel();
-//        $query = $model->huvudbok(1, '2009-07-01', '2010-08-01');
-//
-//        foreach($query->getResult('object') as $row){
-//        }
-
-        // Make sure the count is as expected
-        //$this->assertCount(3, $objects);
-    }
 
 }

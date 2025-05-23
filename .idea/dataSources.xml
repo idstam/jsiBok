@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="UTV Huvudboken Hostup" uuid="83d12ee0-529a-4833-93ca-7d7f6a3e45f2">
-      <driver-ref>mysql.8</driver-ref>
+    <data-source source="LOCAL" name="jsi_bok_test" uuid="ac78cc24-f1f7-4338-b7f4-697850609ff8">
+      <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
-      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://jsisoft.se:3306/njngf_utv_my_huvudbok</jdbc-url>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:D:\src\idstam\jsiBok\ci-app\writable\jsi_bok_test.db</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>
