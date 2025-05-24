@@ -356,11 +356,13 @@ class Sie extends BaseController
                     'active' => 0,
                 ];
                 $result = $bym->ignore(true)->insert($data);
-                $yearID = $bym->where('company_id', $companyID)->where('year_start', $year->Start->format('Ymd'))->first()?->id;
+
+                $yearID = $bym->where('company_id', $companyID)->where('year_start', $year->Start->format('Y-m-d'))->first()?->id;
 
                 if (!$yearID) {
-                    //d($result);
-                    //dd($data);
+                    log_message('error', 'Failed to create booking year. Company ID: ' . $companyID .
+                        ' Start: ' . $year->Start->format('Y-m-d') .
+                        ' End: ' . $year->End->format('Y-m-d'));
                     return false;
                 }
 

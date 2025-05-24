@@ -137,7 +137,6 @@ class CreateCompanyTest extends CIUnitTestCase
         $id = $this->grabFromDatabase('companies', 'id', ['name' => $name]);
 
         $this->seeInDatabase('company_values', ['company_id' => $id, 'name' => 'default_series']);
-        $defaultSeries = $this->grabFromDatabase('company_values', 'string_value', ['company_id' => $id]);
 
         $result->assertRedirectTo('company/select/' . $number);
         
