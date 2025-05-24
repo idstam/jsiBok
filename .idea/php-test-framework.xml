@@ -6,6 +6,7 @@
         <cache>
           <versions>
             <info id="Local/ci-app/vendor/autoload.php" version="10.5.46" />
+            <info id="Local\ci-app/vendor/autoload.php" version="10.5.46" />
           </versions>
         </cache>
       </tool>
