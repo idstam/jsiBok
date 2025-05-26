@@ -76,18 +76,112 @@ class Voucher extends BaseController
             view('common/footer', $data);
     }
 
+    public function getIncomingBalance($voucher = null)
+    {
+        if ($this->session->get('userID') == null) {
+            return redirect()->to('/');
+        }
+        if ($this->session->get('companyName') == null) {
+            return redirect()->to('/company');
+        }
 
-    /**
-     * Converts a template amount to a voucher amount
-     * 
-     * If template amount starts with a %, the voucher amount will be multiplied by 
-     * whatever is after the % and divided by 100.
-     * If the template amount is a number without %, use that number directly.
-     * 
-     * @param string $templateAmount The amount from the template
-     * @param string $voucherAmount The base amount for the voucher
-     * @return string The calculated amount
-     */
+        if ($voucher == null) {
+            $voucher = new VoucherEntity();
+            $voucher->rows = [];
+        } else{
+            //dd($voucher);
+        }
+
+        $data = [];
+        $data['title'] = 'Ingående balanser';
+        $data['description'] = '';
+        $data['page_header'] = 'Ingående balanser för ' .
+            $this->session->get('companyName') . "  " .
+            ensure_date_string($this->session->get('yearStart'), 'Y-m-d');
+
+        $data["voucher"] = $voucher;
+
+        $ca = model('App\Models\CompanyBookingAccountsModel');
+        $data["accounts"] = $ca->where('company_id', $this->session->get('companyID'))->findAll();
+        $data["cost_centers"]  = [];
+        $data["projects"] = [];
+
+        $cv = model('App\Models\CompanyValuesModel');
+        $companyValues = $cv->where('company_id', $this->session->get('companyID'))->findAll();
+
+        $values = [];
+        foreach ($companyValues as $value) {
+            $values[$value->name] = $value;
+        }
+
+        $data['values'] = $values;
+
+        return view('common/header', $data) .
+            view("voucher/edit_incoming_balance", $data) .
+            view('common/footer', $data);
+    }
+
+    public function postSaveIncomingBalance()
+    {
+        if ($this->session->get('userID') == null) {
+            return redirect()->to('/');
+        }
+        if ($this->session->get('companyName') == null) {
+            return redirect()->to('/company');
+        }
+
+        $v = new \App\Entities\VoucherEntity();
+        $v->voucher_date = ensure_date($this->session->get('yearStart'));
+        //$v->title = $this->request->getPost("vtitle");
+        $v->serie = "FAKE TO PASS VALIDATION";
+        $v->source = "FAKE TO PASS VALIDATION";
+        $v->title = "FAKE TO PASS VALIDATION";
+        //$v->company_id  = $this->session->get('companyID');
+        //$v->user_id  = $this->session->get('userID');
+        //$v->external_reference  = '';
+        $rows = [];
+        $checkTotal = '0';
+        $rowNo = 0;
+
+        while (true) {
+
+            if ($this->request->getPost("vr_account-" . $rowNo) !== null) {
+                $vr = new \App\Entities\VoucherRowEntity();
+                $vr->company_id  = $this->session->get('companyID');
+                $vr->account_id = $this->request->getPost("vr_account-" . $rowNo);
+                $vr->cost_center_id = $this->request->getPost("vr_costcenter-" . $rowNo);
+                $vr->project_id = $this->request->getPost("vr_project-" . $rowNo);
+                $vr->setAmountFromPost($this->request->getPost("vr_debet-" . $rowNo), $this->request->getPost("vr_kredit-" . $rowNo));
+                $rows[$rowNo] = $vr;
+                $rowNo += 1;
+
+            } else {
+                break;
+            }
+        }
+
+        $v->rows = $rows;
+        $v->booking_year_start = ensure_date($this->session->get('yearStart'));
+        $v->booking_year_end = ensure_date($this->session->get('yearEnd'));
+        $v->booking_year_id = $this->session->get('yearID');
+
+        $cabm = model('App\Models\CompanyAccountBalanceModel');
+        $result = $cabm->Save($v);
+
+        if ($v->id !== -1) {
+            $this->journal->Write('Nytt verifikat', "$v->serie $v->voucher_number | $v->title");
+            return $this->getSaved($v);
+        } else {
+            $errCount = 0;
+            foreach ($v->validationErrors as $e) {
+                $errCount++;
+                $this->session->setFlashdata('errors', array("VoucherValidationError$errCount" => $e));
+            }
+            return $this->getIndex($v);
+        }
+    }
+
+
     private function format_bc($number): string
     {
         $number = (new BcMath\Number($number))->round(0, RoundingMode::HalfEven);
@@ -99,6 +193,17 @@ class Voucher extends BaseController
         return $ret ;
     }
 
+    /**
+     * Converts a template amount to a voucher amount
+     *
+     * If template amount starts with a %, the voucher amount will be multiplied by
+     * whatever is after the % and divided by 100.
+     * If the template amount is a number without %, use that number directly.
+     *
+     * @param string $templateAmount The amount from the template
+     * @param string $voucherAmount The base amount for the voucher
+     * @return string The calculated amount
+     */
     private function convertTemplateAmount(string $templateAmount, string $voucherAmount): string
     {
         // Check if the template amount starts with a %
@@ -312,7 +417,6 @@ class Voucher extends BaseController
             }
             return $this->getIndex($v);
         }
-
 
     }
 }

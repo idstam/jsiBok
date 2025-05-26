@@ -19,12 +19,15 @@ $icons = new \Feather\IconManager();
     <legend><strong>Inställningar för <?=
             esc($company->name) ?></strong></legend>
             <label for="booking_year">Aktivt bokföringsår</label>
+        <div class="grid">
             <select id="booking_year" name="booking_year">
                 <?php
                 foreach ($booking_years as $year) { ?>
                     <option value="<?=$year->id ?>"  <?= esc($year->active) == 1 ? 'selected' : '' ?>><?= date_format(date_create(esc($year->year_start)), 'Y-m-d') ?></option>
                 <?php } ?>
             </select>
+            <strong><a  href="/voucher/incoming-balance">Ingående balanser</a></strong>
+        </div>
             <label for="new_booking_year_start">Nytt bokföringsår</label>
         <div class="grid">
             <label for="from">Från</label>
