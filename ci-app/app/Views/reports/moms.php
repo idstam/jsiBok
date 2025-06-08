@@ -17,7 +17,7 @@ function format_bc($number): string
 $ruta = array_fill(0, 100, '0');
 
 foreach ($reportQuery as $row) {
-    $num = new BcMath\Number($row->amount)->round(0, RoundingMode::HalfEven);
+    $num = (new BcMath\Number($row->amount))->round(0, RoundingMode::HalfEven);
     $ruta[$row->ruta] = $num;
     //$ruta[$row->ruta] = bcadd($row->amount, 0, 0);
 

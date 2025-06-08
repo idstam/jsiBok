@@ -18,7 +18,7 @@ $ut_amount_sum2 = '0';
 
 function format_bc($number): string
 {
-    $number = new BcMath\Number($number)->round(0, RoundingMode::HalfEven);
+    $number = (new BcMath\Number($number))->round(0, RoundingMode::HalfEven);
     $tokens = str_split(strrev($number), 3);
     $ret = join(' ', $tokens);
     $ret = strrev($ret);
@@ -27,7 +27,7 @@ function format_bc($number): string
     return $ret ;
 }
 
-function level1sum($title, $in_amount_sum1, $p_amount_sum1, $ut_amount_sum1)
+function level1sum($title, $in_amount_sum1, $p_amount_sum1, $ut_amount_sum1): void
 {
     helper('jsi_helper');
     ?>
@@ -48,7 +48,7 @@ function level1sum($title, $in_amount_sum1, $p_amount_sum1, $ut_amount_sum1)
 
 <?php }
 
-function level2sum($title, $in_amount_sum2, $p_amount_sum2, $ut_amount_sum2)
+function level2sum($title, $in_amount_sum2, $p_amount_sum2, $ut_amount_sum2): void
 { ?>
     <tr>
             <td style="font-weight: bold; padding-left: 2em;">Summa <?= $title ?></td>

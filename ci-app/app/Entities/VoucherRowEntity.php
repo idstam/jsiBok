@@ -32,15 +32,16 @@ class VoucherRowEntity extends Entity
                 $debet = str_replace('-', '', $debet);
             }
             $this->attributes['amount'] = $debet;
-            return;
+            return true;
         }
         if($kredit != '' && $kredit != '0' && $kredit !== null){
             if(bccomp($kredit, 0, 2) == 1){
                 $kredit = '-' . $kredit;
             }
             $this->attributes['amount'] = $kredit;
-            return;
+            return true;
         }
+        return false;
     }
 
     public function setTemplateAmountFromPost(string $debet,string $kredit){
