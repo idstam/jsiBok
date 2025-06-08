@@ -11,6 +11,10 @@ class Company extends BaseController
     {
         helper('jsi_helper');
 
+        if ($this->session->get('userID') == null) {
+            return redirect()->to('/');
+        }
+
         $data['title'] = 'Välj, eller skapa, företag';
         $data['description'] = '';
 
@@ -18,22 +22,22 @@ class Company extends BaseController
         $companies = $cm->getCompaniesByUserID($this->session->get('userID'));
         
         foreach ($companies as $c) {
-            
             if ($c->number === $cno || $c->id == $this->session->get("companyID") || count($companies)== 1) {
-                                
-                
-                if ($c->number === $cno || count($companies)== 1) {
 
-                    //Write to the session only if we are changeing selected company
+                $by = model('App\Models\CompanyBookingYearsModel');
+                $y = $by->where('active', 1)->where('company_id', $c->id) ->first();
+
+                $start = ensure_date($y->year_start, 'Y-m-d');
+                $end = ensure_date($y->year_end, 'Y-m-d');
+                $this->session->set('yearStart', $start);
+                $this->session->set('yearEnd', $end);
+                $this->session->set('yearID', $y->id);
+
+                if ($c->number === $cno || count($companies)== 1) {
+                    //Write to the session only if we are changing selected company
 
                     //TODO:Use enforce date for booking year
-                    $by = model('App\Models\CompanyBookingYearsModel');
-                    $y = $by->where('active', 1)->first();
-                    $start = ensure_date($y->year_start, 'Y-m-d');
-                    $end = ensure_date($y->year_end, 'Y-m-d');
-                    $this->session->set('yearStart', $start);
-                    $this->session->set('yearEnd', $end);
-                    $this->session->set('yearID', $y->id);
+
                     $this->session->set('companyID', $c->id);
                     $this->session->set('companyNumber', $cno);
                     $this->session->set('companyName', $c->name);
@@ -64,8 +68,6 @@ class Company extends BaseController
         $vs = model('App\Models\CompanyVoucherSeriesModel');
         $series = $vs->where('company_id', $this->session->get('companyID'))->findAll();
         $data['voucher_series'] = $series;
-
-
 
         echo view('common/header', $data);
 
@@ -124,11 +126,13 @@ class Company extends BaseController
     }
     public function postEdit()
     {
+        if ($this->session->get('userID') == null) {
+            return redirect()->to('/');
+        }
+        if ($this->session->get('companyName') == null) {
+            return redirect()->to('/company');
+        }
 
-        $sessionEmail = $this->session->get('email');
-        $sessionUserID = $this->session->get('userID');
-
-        $companiesModel = model('App\Models\CompaniesModel');
         $postData = $this->request->getPost();
         //TODO:Validate this data before saving
 

@@ -20,7 +20,7 @@ $icons = new \Feather\IconManager();
             esc($company->name) ?></strong></legend>
             <label for="booking_year">Aktivt bokföringsår</label>
         <div class="grid">
-            <select id="booking_year" name="booking_year">
+            <select id="booking_year" name="booking_year" onchange="this.form.submit()">
                 <?php
                 foreach ($booking_years as $year) { ?>
                     <option value="<?=$year->id ?>"  <?= esc($year->active) == 1 ? 'selected' : '' ?>><?= date_format(date_create(esc($year->year_start)), 'Y-m-d') ?></option>
@@ -66,7 +66,7 @@ $icons = new \Feather\IconManager();
                 <?php } ?>
             </select>
 
-                <input class="tertiary" type="submit" id="submit" name="submit" value="Spara" />
+                <input class="tertiary" type="submit" id="spara" name="spara" value="Spara" />
 
 
 </fieldset>

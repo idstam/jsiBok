@@ -8,5 +8,12 @@
       <jdbc-url>jdbc:sqlite:D:\src\idstam\jsiBok\ci-app\writable\jsi_bok_test.db</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="UTV_huvudboken" uuid="11ffb545-4aea-4381-9c64-b7318701cd95">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://jsisoft.se:3306/njngf_utv_my_huvudbok</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>
