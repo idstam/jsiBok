@@ -45,10 +45,11 @@ if(!function_exists("format_bc")) {
 
         <div class="row">
             <div class="col-sm-1 col-md-1">
+                <?php if (isset($bookingYearActive) && $bookingYearActive): ?>
                 <a href="/voucher/revert/<?= esc($voucher->serie) . esc($voucher->voucher_number) ?>">
                     <button>Ångra</button>
                 </a>
-
+                <?php endif; ?>
             </div>
         </div>
     </fieldset>

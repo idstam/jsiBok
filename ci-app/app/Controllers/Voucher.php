@@ -367,11 +367,22 @@ class Voucher extends BaseController
             }
         }
 
+        // Check if the voucher's booking year is active
+        $bookingYearActive = false;
+        if (isset($voucher->booking_year_id)) {
+            $bookingYearModel = model('App\Models\CompanyBookingYearsModel');
+            $bookingYear = $bookingYearModel->find($voucher->booking_year_id);
+            if ($bookingYear && $bookingYear->active) {
+                $bookingYearActive = true;
+            }
+        }
+
         $data = [];
         $data['title'] = 'Bokföring';
         $data['description'] = '';
         //$data['page_header'] = 'Senaste verifikatet för ' . $this->session->get('companyName');
         $data["voucher"] = $voucher;
+        $data["bookingYearActive"] = $bookingYearActive;
 
         echo view('common/header', $data);
         echo view("voucher/created_voucher", $data);
