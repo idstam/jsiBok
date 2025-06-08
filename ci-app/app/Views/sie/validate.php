@@ -69,9 +69,8 @@
             </select> i bokföringen.
         <?php } ?>
         </div>
-        <span id="spinner" class="loader" style="visibility: collapse;"></span>
         <div class="grid">
-        <input class="tertiary" type="submit" id="submit" name="submit" value="Importera" onclick="loading('submit')"/>
+        <input type="submit" id="submit" name="submit" value="Importera" aria-busy="true" onclick="loading('submit')"/>
             <span></span>
         </div>
     </fieldset>

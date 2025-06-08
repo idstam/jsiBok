@@ -181,7 +181,7 @@ from (
              r.amount                                               as amount,
              case when r.amount >= 0 then r.amount else 0 end       as debet,
              case when r.amount < 0 then (r.amount * -1) else 0 end as kredit,
-             (cv.serie || cv.voucher_number)               as ver_number,
+             CONCAT(cv.serie, cv.voucher_number)               as ver_number,
              cv.title                                               as name,
              cv.voucher_date
       from company_voucher_rows r
@@ -262,7 +262,7 @@ select
         vr.cost_center_id,
         vr.project_id,
         vr.amount,
-        (v.serie || v.voucher_number) as ver_number,
+        CONCAT(v.serie, v.voucher_number) as ver_number,
         cba.name as account_name
 from company_vouchers v
 inner join company_voucher_rows vr on v.id = vr.voucher_id
