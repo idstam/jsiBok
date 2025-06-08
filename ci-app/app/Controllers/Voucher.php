@@ -6,7 +6,9 @@ use App\Controllers\BaseController;
 use App\Entities;
 use App\Entities\VoucherEntity;
 
+use CodeIgniter\Database\Exceptions\DatabaseException;
 use CodeIgniter\HTTP\ResponseInterface;
+use Config\Database;
 
 class Voucher extends BaseController
 {
@@ -143,42 +145,55 @@ class Voucher extends BaseController
         $checkTotal = '0';
         $rowNo = 0;
 
-        while (true) {
+        $db = Database::connect();
+        try {
+            $db->transException(true)->transStart();
+            $cabm = model('App\Models\CompanyAccountBalanceModel');
 
-            if ($this->request->getPost("vr_account-" . $rowNo) !== null) {
-                $vr = new \App\Entities\VoucherRowEntity();
-                $vr->company_id  = $this->session->get('companyID');
-                $vr->account_id = $this->request->getPost("vr_account-" . $rowNo);
-                $vr->cost_center_id = $this->request->getPost("vr_costcenter-" . $rowNo);
-                $vr->project_id = $this->request->getPost("vr_project-" . $rowNo);
-                $vr->setAmountFromPost($this->request->getPost("vr_debet-" . $rowNo), $this->request->getPost("vr_kredit-" . $rowNo));
-                $rows[$rowNo] = $vr;
-                $rowNo += 1;
+            while (true) {
 
-            } else {
-                break;
+                if ($this->request->getPost("vr_account-" . $rowNo) !== null) {
+                    $vr = new \App\Entities\VoucherRowEntity();
+                    $vr->company_id = $this->session->get('companyID');
+                    $vr->account_id = intval($this->request->getPost("vr_account-" . $rowNo));
+                    $vr->cost_center_id = intval($this->request->getPost("vr_costcenter-" . $rowNo));
+                    $vr->project_id = intval($this->request->getPost("vr_project-" . $rowNo));
+                    if( !$vr->setAmountFromPost($this->request->getPost("vr_debet-" . $rowNo), $this->request->getPost("vr_kredit-" . $rowNo))){
+                        break;
+                    }
+                    $rows[$rowNo] = $vr;
+                    $rowNo += 1;
+
+                    $data = [
+                        'booking_year_id' => $this->session->get('yearID'),
+                        'type' => 'IB',
+                        'company_id' => $this->session->get('companyID'),
+                        'account_id' => $vr->account_id,
+                        'cost_center_id' => $vr->cost_center_id,
+                        'project_id' => $vr->project_id,
+                        'amount' => $vr->amount,
+                    ];
+
+
+                    $cabm->replace($data, false);
+
+
+                } else {
+                    break;
+                }
             }
+
+            $db->transException(true)->transCommit();
+        } catch (DatabaseException $e) {
+            log_message("warning", $e->getMessage());
+            $this->session->setFlashdata('errors', array("UnexpectedDbError." => "Ett oväntat fel uppstod när vi försökte spara ingående balanser. Loggen är skickad till supporten."));
+            $db->transRollback();
+            return $this->getIncomingBalance();
         }
 
         $v->rows = $rows;
-        $v->booking_year_start = ensure_date($this->session->get('yearStart'));
-        $v->booking_year_end = ensure_date($this->session->get('yearEnd'));
-        $v->booking_year_id = $this->session->get('yearID');
 
-        $cabm = model('App\Models\CompanyAccountBalanceModel');
-        $result = $cabm->Save($v);
-
-        if ($v->id !== -1) {
-            $this->journal->Write('Nytt verifikat', "$v->serie $v->voucher_number | $v->title");
-            return $this->getSaved($v);
-        } else {
-            $errCount = 0;
-            foreach ($v->validationErrors as $e) {
-                $errCount++;
-                $this->session->setFlashdata('errors', array("VoucherValidationError$errCount" => $e));
-            }
-            return $this->getIndex($v);
-        }
+        return $this->getIncomingBalance();
     }
 
 
@@ -308,9 +323,9 @@ class Voucher extends BaseController
             if ($this->request->getPost("vr_account-" . $rowNo) !== null) {
                 $vr = new \App\Entities\VoucherRowEntity();
                 $vr->company_id  = $this->session->get('companyID');
-                $vr->account_id = $this->request->getPost("vr_account-" . $rowNo);
-                $vr->cost_center_id = $this->request->getPost("vr_costcenter-" . $rowNo);
-                $vr->project_id = $this->request->getPost("vr_project-" . $rowNo);
+                $vr->account_id = intval($this->request->getPost("vr_account-" . $rowNo));
+                $vr->cost_center_id = intval($this->request->getPost("vr_costcenter-" . $rowNo));
+                $vr->project_id = intval($this->request->getPost("vr_project-" . $rowNo));
                 $vr->setAmountFromPost($this->request->getPost("vr_debet-" . $rowNo), $this->request->getPost("vr_kredit-" . $rowNo));
                 $rows[$rowNo] = $vr;
                 $rowNo += 1;

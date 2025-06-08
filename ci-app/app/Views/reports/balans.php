@@ -26,7 +26,7 @@ function format_bc($number): string
     return $ret ;
 }
 
-function level1sum($title, $in_amount_sum1, $p_amount_sum1, $ut_amount_sum1)
+function level1sum($title, $in_amount_sum1, $p_amount_sum1, $ut_amount_sum1): void
 { ?>
     <tr>
         <td>
@@ -44,7 +44,7 @@ function level1sum($title, $in_amount_sum1, $p_amount_sum1, $ut_amount_sum1)
     </tr>
 
 <?php    }
-function level2sum($title, $in_amount_sum2, $p_amount_sum2, $ut_amount_sum2)
+function level2sum($title, $in_amount_sum2, $p_amount_sum2, $ut_amount_sum2): void
 { ?>
     <tr>
         <td style="font-weight: bold; padding-left: 2em;">Summa <?= $title ?></td>

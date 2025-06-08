@@ -62,8 +62,7 @@ echo('</datalist>');
                     </th>
                 </tr>
                 <?php endforeach; ?>
-            <?php else: ?>$vs = model('App\Models\CompanyVoucherSeriesModel');
-        $data["voucher_series"] = $vs->where('company_id', $this->session->get('companyID'))->findAll();
+            <?php else: ?>
 
                 <tr class="voucher_row">
                     <th><input list="dl_accounts" id="vr_account-0" name="vr_account-0" class="voucher_row_field" size="10"

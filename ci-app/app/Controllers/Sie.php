@@ -260,7 +260,7 @@ class Sie extends BaseController
 
     private function account_balances(SieDocument $doc, $companyID): bool
     {
-
+        $am = model('App\Models\CompanyAccountBalanceModel');
         //TODO: Look for SIE-file with #OBJEKT to test cost center and project
         foreach (['IB' => $doc->IB, 'UB' => $doc->UB, 'RES' => $doc->RES] as $type => $periodValues) {
             foreach ($periodValues as $periodValue) {
@@ -269,7 +269,7 @@ class Sie extends BaseController
                     continue;
                 }
 
-                $am = model('App\Models\CompanyAccountBalanceModel');
+
                 $data = [
                     'booking_year_id' => $this->bookingYears[$periodValue->YearNr]['dbID'],
                     'type' => $type,

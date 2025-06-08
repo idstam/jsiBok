@@ -31,7 +31,8 @@ $errorId = uniqid('error', true);
             Environment: <?= ENVIRONMENT ?>
         </div>
         <div class="container">
-            <h1><?= esc($title), esc($exception->getCode() ? ' #' . $exception->getCode() : '') ?></h1>
+            <h1><?=
+                esc($title), esc($exception->getCode() ? ' #' . $exception->getCode() : '') ?></h1>
             <p>
                 <?= nl2br(esc($exception->getMessage())) ?>
                 <a href="https://www.duckduckgo.com/?q=<?= urlencode($title . ' ' . preg_replace('#\'.*\'|".*"#Us', '', $exception->getMessage())) ?>"
@@ -42,7 +43,8 @@ $errorId = uniqid('error', true);
 
     <!-- Source -->
     <div class="container">
-        <p><b><?= esc(clean_path($file)) ?></b> at line <b><?= /** @var string $line */
+        <p><b><?=
+                esc(clean_path($file)) ?></b> at line <b><?= /** @var string $line */
                 esc($line) ?></b></p>
 
         <?php if (is_file($file)) : ?>
@@ -93,7 +95,8 @@ $errorId = uniqid('error', true);
             <div class="content" id="backtrace">
 
                 <ol class="trace">
-                <?php foreach ($trace as $index => $row) : ?>
+                    <?php
+                foreach ($trace as $index => $row) : ?>
 
                     <li>
                         <p>
