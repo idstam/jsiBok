@@ -67,3 +67,14 @@
 #--------------------------------------------------------------------
 
 # logger.threshold = 4
+
+
+#App specific stuff
+app.hostingCompany = APP_HOSTING_COMPANY
+app.supportEmail = 'test@examlpe.com'
+app.slackUrl = 'the slack url'
+
+mailgun.key = 'mailgun-key'
+
+#Set this to true if you want users to be able so self register for accounts
+app.user.selfRegistration = 'off'
