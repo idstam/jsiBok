@@ -44,7 +44,8 @@ class ReportsModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function balansAndResultat($companyId, $booking_year, $start, $end, $accStart, $accEnd){
+    public function balansAndResultat($companyId, $booking_year, $start, $end, $accStart, $accEnd): \CodeIgniter\Database\Query|bool|\CodeIgniter\Database\BaseResult
+    {
         $sql = "
 
 select
@@ -66,8 +67,8 @@ from (
              0                       as is_amount,
              0                       as p_amount
       from company_booking_accounts cba
-               inner join base_account_headers level1 on (cba.account_id / 1000) = level1.number and level1.level = 1
-               inner join base_account_headers level2 on (cba.account_id / 100) = level2.number and level2.level = 2
+               inner join base_account_headers level1 on left(cba.account_id, 1) = level1.number and level1.level = 1
+               inner join base_account_headers level2 on left(cba.account_id, 2) = level2.number and level2.level = 2
                left join company_account_balance cab
                          on cba.account_id = cab.account_id and cab.booking_year_id = @year and cab.type = 'IB'
       where cba.account_id between @accStart and @accEnd
@@ -84,8 +85,8 @@ union all
            sum(r.amount)             as is_amount,
            0 as p_amount
     from company_voucher_rows r
-             inner join base_account_headers level1 on (r.account_id / 1000) = level1.number and level1.level = 1
-             inner join base_account_headers level2 on (r.account_id / 100) = level2.number and level2.level = 2
+             inner join base_account_headers level1 on left(r.account_id, 1) = level1.number and level1.level = 1
+             inner join base_account_headers level2 on left(r.account_id, 2) = level2.number and level2.level = 2
              inner join company_vouchers cv on r.voucher_id = cv.id
         inner join company_booking_accounts cba on r.account_id = cba.account_id
     where r.account_id between @accStart and @accEnd
@@ -104,8 +105,8 @@ union all
            0             as is_amount,
            sum(r.amount) as p_amount
     from company_voucher_rows r
-             inner join base_account_headers level1 on (r.account_id / 1000) = level1.number and level1.level = 1
-             inner join base_account_headers level2 on (r.account_id / 100) = level2.number and level2.level = 2
+             inner join base_account_headers level1 on left(r.account_id, 1) = level1.number and level1.level = 1
+             inner join base_account_headers level2 on left(r.account_id, 2) = level2.number and level2.level = 2
              inner join company_vouchers cv on r.voucher_id = cv.id
             inner join company_booking_accounts cba on r.account_id = cba.account_id
     where r.account_id between @accStart and @accEnd
