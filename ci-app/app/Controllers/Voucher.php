@@ -90,6 +90,26 @@ class Voucher extends BaseController
         if ($voucher == null) {
             $voucher = new VoucherEntity();
             $voucher->rows = [];
+
+            // Get incoming balances from the database
+            $cab = model('App\Models\CompanyAccountBalanceModel');
+            $balances = $cab->where('company_id', $this->session->get('companyID'))
+                           ->where('booking_year_id', $this->session->get('yearID'))
+                           ->where('type', 'IB')
+                           ->orderBy('account_id', 'ASC')
+                           ->findAll();
+
+            // Create voucher rows from the balances
+            $rows = [];
+            foreach ($balances as $balance) {
+                $vr = new \App\Entities\VoucherRowEntity();
+                $vr->account_id = $balance->account_id;
+                $vr->cost_center_id = $balance->cost_center_id;
+                $vr->project_id = $balance->project_id;
+                $vr->amount = $balance->amount;
+                $rows[] = $vr;
+            }
+            $voucher->rows = $rows;
         } else{
             //dd($voucher);
         }
