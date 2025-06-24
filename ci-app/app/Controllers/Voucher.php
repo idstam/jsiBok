@@ -99,6 +99,63 @@ class Voucher extends BaseController
                            ->orderBy('account_id', 'ASC')
                            ->findAll();
 
+            // If no incoming balances found, try to get outgoing balances from previous booking year
+            if (empty($balances)) {
+                // Find the previous booking year
+                $cby = model('App\Models\CompanyBookingYearsModel');
+                $currentYear = $cby->find($this->session->get('yearID'));
+
+                if ($currentYear) {
+                    $previousYear = $cby->where('company_id', $this->session->get('companyID'))
+                                      ->where('year_end <', $currentYear->year_start)
+                                      ->orderBy('year_end', 'DESC')
+                                      ->first();
+
+                    if ($previousYear) {
+                        // Get outgoing balances from previous year using balansAndResultat
+                        $reportsModel = model('App\Models\ReportsModel');
+
+                        // Get the year start and end dates
+                        $yearStart = ensure_date($previousYear->year_start);
+                        $yearEnd = ensure_date($previousYear->year_end)->modify('+1 day');
+
+                        // Use balansAndResultat to get the balances
+                        // Account range from 1000 to 9999 to cover all accounts
+                        $result = $reportsModel->balansAndResultat(
+                            $this->session->get('companyID'),
+                            $previousYear->id,
+                            ensure_date_string($yearStart, 'Y-m-d'),
+                            ensure_date_string($yearEnd, 'Y-m-d'),
+                            1000,
+                            2999
+                        );
+
+                        $balances = [];
+
+                        // Process the results to calculate outgoing balances (UB = IB + IS + P)
+                        foreach ($result->getResult() as $row) {
+                            // Create a balance object with the calculated outgoing balance
+                            $balance = new \stdClass();
+                            $balance->account_id = $row->account_id;
+                            $balance->cost_center_id = null;
+                            $balance->project_id = null;
+                            // Outgoing balance is the sum of incoming balance, interim balance, and period balance
+                            $balance->amount = $row->ib_amount + $row->is_amount + $row->p_amount;
+
+                            // Only add non-zero balances
+                            if ($balance->amount != 0) {
+                                $balances[] = $balance;
+                            }
+                        }
+
+                        // If outgoing balances found, add flash data warning
+                        if (!empty($balances)) {
+                            $this->session->setFlashdata('warning', array("Kopierat" => 'Ingående balanser har kopierats från föregående års utgående balanser. Kom ihåg att spara dem.'));
+                        }
+                    }
+                }
+            }
+
             // Create voucher rows from the balances
             $rows = [];
             foreach ($balances as $balance) {

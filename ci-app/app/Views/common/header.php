@@ -39,6 +39,7 @@ if ($errors != NULL) {
     }
     echo('</ul>');
     echo('</article>');
+    $session->setFlashdata('errors', null);
 }
 
 
@@ -51,6 +52,7 @@ if ($infos != NULL) {
     }
     echo('</ul>');
     echo('</article>');
+    $session->setFlashdata('info', null);
 }
 
 $warnings = $session->getFlashdata('warning');
@@ -62,6 +64,7 @@ if ($warnings != NULL) {
     }
     echo('</ul>');
     echo('</article>');
+    $session->setFlashdata('warning', null);
 }
 
 $home_caption = "huvudboken.se";

@@ -27,15 +27,20 @@ class VoucherRowEntity extends Entity
     protected $casts   = [];
 
     public function setAmountFromPost($debet, $kredit){
-        if($debet != '' && $debet != '0' && $debet !== null){
-            if(bccomp($debet, 0, 2) == -1){
+
+        if ($debet != '' && $debet != '0' && $debet !== null) {
+            $debet = str_replace(',', '.', $debet);
+            $debet = str_replace(' ', '', $debet);
+            if (bccomp($debet, 0, 2) == -1) {
                 $debet = str_replace('-', '', $debet);
             }
             $this->attributes['amount'] = $debet;
             return true;
         }
-        if($kredit != '' && $kredit != '0' && $kredit !== null){
-            if(bccomp($kredit, 0, 2) == 1){
+        if ($kredit != '' && $kredit != '0' && $kredit !== null) {
+            $kredit = str_replace(',', '.', $kredit);
+            $kredit = str_replace(' ', '', $kredit);
+            if (bccomp($kredit, 0, 2) == 1) {
                 $kredit = '-' . $kredit;
             }
             $this->attributes['amount'] = $kredit;
