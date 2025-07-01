@@ -5,10 +5,12 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Entities;
 use App\Entities\VoucherEntity;
+use BcMath\Number;
 
 use CodeIgniter\Database\Exceptions\DatabaseException;
 use CodeIgniter\HTTP\ResponseInterface;
 use Config\Database;
+use RoundingMode;
 
 class Voucher extends BaseController
 {
@@ -276,7 +278,7 @@ class Voucher extends BaseController
 
     private function format_bc($number): string
     {
-        $number = (new BcMath\Number($number))->round(0, RoundingMode::HalfEven);
+        $number = (new Number($number))->round(0, RoundingMode::HalfEven);
         $tokens = str_split(strrev($number), 3);
         $ret = join(' ', $tokens);
         $ret = strrev($ret);
