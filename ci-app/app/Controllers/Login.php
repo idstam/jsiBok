@@ -63,9 +63,14 @@ class Login extends BaseController
 
 
 						return redirect()->to('/company');
-					}
+					}else {
+                        $this->session->setFlashdata('errors', array("FelNamnPwd" => "Fel användarnamn eller lösenord."));
+
+                        return redirect()->to('/login');
+                        return;
+                    }
 				} else {
-					$this->session->setFlashdata('errors', array("Okänd epostadress" => "Epostadressen " . esc($this->request->getPost('user')) . " används inte av någon användare i systemet."));
+					$this->session->setFlashdata('errors', array("FelNamnPwd" => "Fel användarnamn eller lösenord."));
 					
 					return redirect()->to('/login');
 					return;

@@ -5,7 +5,7 @@
     <?= csrf_field() ?>
     <fieldset>
         <legend><strong>Logga in</strong></legend>
-        <label for="user">Epost</label>
+        <label for="user">E-postadress/Användarnamn</label>
         <input type="text" id="user" name="user" style="padding: calc(var(--universal-padding) / 2);"/>
         <label for="password">Lösenord</label>
         <input type="password" id="password" name="password" style="padding: calc(var(--universal-padding) / 2);"/>
