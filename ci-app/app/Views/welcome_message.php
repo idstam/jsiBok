@@ -6,6 +6,7 @@ Det här är en tjänst för dig som vill hantera din egen bokföring, men inte 
 </p>
 
 <br>
+<p>Systemet utvecklas med AGPL som licens och koden finns hos <a href="https://codeberg.org/idstam/jsiBok">Codeberg</a> </p>
 
 <?php if(env('app.user.selfRegistration') == 'on') { ?>
 <nav>
