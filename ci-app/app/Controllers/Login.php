@@ -37,14 +37,14 @@ class Login extends BaseController
 			];
 			if ($this->validate($fieldRules)) {
 
+				if ($this->request->getPost('pwdreset') != null) {
+					$this->pwd_reset();
+					return;
+				}
+
 				$usersModel = model('App\Models\UsersModel');
 				$user = $usersModel->where('email', $this->request->getPost('user'))->first();
 				if ($user !== null) {
-
-					if ($this->request->getPost('pwdreset') != null) {
-						$this->pwd_reset();
-						return;
-					}
 
 					$h = md5($user->salt . "|" . $this->request->getPost('password'));
 
