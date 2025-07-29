@@ -19,3 +19,4 @@ application/logs/*
 /vendor/
 
 /ci-app/writable/jsi_bok_test.db
+/.idea/
