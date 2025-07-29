@@ -5,7 +5,7 @@
       <paths name="green.huvudboken">
         <serverdata>
           <mappings>
-            <mapping deploy="/green.huvudboken.se" local="$PROJECT_DIR$/ci-app" web="/" />
+            <mapping deploy="/" local="$PROJECT_DIR$/ci-app" web="/" />
           </mappings>
         </serverdata>
       </paths>

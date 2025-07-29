@@ -108,7 +108,7 @@ class Login extends BaseController
 		$home = isset($_SERVER['SERVER_NAME']) && $_SERVER['SERVER_NAME'] == "huvudboken.se" ? "huvudboken.se" : "localhost:8080";
 		$text = 'Hej' . PHP_EOL . PHP_EOL .
 			'Här kommer en länk så att du kan byta lösenord på huvudboken.se.' . PHP_EOL . PHP_EOL .
-			'https://' . $home . '/resetpassword?resetid=' . $requestID . PHP_EOL . PHP_EOL .
+			'https://' . $home . '/reset-password?resetid=' . $requestID . PHP_EOL . PHP_EOL .
 			'mvh' . PHP_EOL . PHP_EOL . PHP_EOL . PHP_EOL .
 			'//johan//';
 

@@ -38,7 +38,7 @@ class ResetPassword extends BaseController
 
 
         if($resetRequest ){
-            echo view('password_reset_set_new', $data);
+            echo view('user/password_reset_set_new', $data);
         } else{
             $validation->setError('old', 'Länken du följde hit är inte giltig längre. Försök återställa lösenordet igen.' . $resetID ) ;
             $this->session->setFlashdata('errors', $validation->getErrors());
@@ -62,17 +62,17 @@ class ResetPassword extends BaseController
         if($pwdA !=$pwdB ){ 
             $validation->setError('passwords', 'De angivna lösenorden är olika.') ;
             $this->session->setFlashdata('errors', $validation->getErrors());
-            return '/resetpassword?resetid=' .$resetID  ;
+            return '/reset-password?resetid=' .$resetID  ;
         } 
 
         $usersModel = model('App\Models\UsersModel');
 		$user = $usersModel->where('email', $resetRequest['email'])->first();
-		if (is_array($user) && count($user) > 0) {
+		if ($user) {
 
-			$user['salt'] = uniqid();
-			$hash = md5($user['salt'] . "|" . $pwdA);
+			$user->salt = uniqid();
+			$hash = md5($user->salt . "|" . $pwdA);
 
-			$user['password'] = $hash;
+			$user->password = $hash;
 
 			$usersModel->save($user);
 

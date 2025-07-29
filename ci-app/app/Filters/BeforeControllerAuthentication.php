@@ -27,11 +27,12 @@ class BeforeControllerAuthentication implements FilterInterface
     {
         $session = service('session');
         //Controllers that don't need a logged in user.
-        $anon = ['App\Controllers\About', 'App\Controllers\Login'];
-        if(in_array($anon, $anon)){
+        $anon = ['about', 'login', 'reset-password'];
+        if(in_array($request->getUri()->getRoutePath(), $anon)){
             return;
         }
         if ($session->get('userID') == null) {
+            //dd($request->getUri()->getRoutePath());
             $session->setFlashdata('warning', array("NotAuthorized" => "Du måste logga in innan du försöker göra något produktivt här."));
             return redirect()->to('/');
         }

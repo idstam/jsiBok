@@ -3,13 +3,13 @@
 
 
 <?php
-    $headline = "Logga in";
+    $headline = "Byt lösenord";
     ?>
 <p>
 <?= $headline ; ?>
 <p>
 
-<form action="/ResetPassword" method="post">
+<form action="/reset-password" method="post">
 
     <?= csrf_field() ?>
     <input type='hidden' id='reset_id' name='reset_id' value='<?= /** @var string $reset_id */

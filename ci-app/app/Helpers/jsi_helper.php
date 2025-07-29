@@ -99,7 +99,7 @@ if (!function_exists('random_str')) {
 if (!function_exists('slackIt')) {
     function slackIt($logLevel, $text, $correlationID, $sendToLog = true)
     {
-        if (defined('PHPUNIT_COMPOSER_INSTALL') || defined('__PHPUNIT_PHAR__')) {
+        if(ENVIRONMENT === 'testing') {
             // is not PHPUnit run
             return 0;
         }
@@ -149,9 +149,9 @@ if (!function_exists('slackIt')) {
 if (!function_exists('mailgun')) {
     function mailgun($to, $toname, $mailfromnane, $mailfrom, $subject, $html, $text, $tag, $replyto)
     {
-        if (! defined('PHPUNIT_COMPOSER_INSTALL') && ! defined('__PHPUNIT_PHAR__')) {
+        if(ENVIRONMENT === 'testing') {
             // is not PHPUnit run
-            return;
+            return true;
         }
 
         $mgurl = 'https://api.eu.mailgun.net/v3/mg.huvudboken.se';

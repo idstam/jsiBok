@@ -2,8 +2,8 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="29ad83c5-82e0-4e3c-b817-a7216ef39022" name="green.huvudboken" url="http://jsisoft.se">
-        <fileTransfer accessType="FTPS" host="jsisoft.se" port="21">
+      <webServer id="29ad83c5-82e0-4e3c-b817-a7216ef39022" name="green.huvudboken" url="https://huvudboken.se">
+        <fileTransfer rootFolder="/green.huvudboken.se" accessType="FTPS" host="jsisoft.se" port="21">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>
