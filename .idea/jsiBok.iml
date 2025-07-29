@@ -5,10 +5,7 @@
       <sourceFolder url="file://$MODULE_DIR$/ci-app/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/ci-app" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/ci-app/app" isTestSource="false" packagePrefix="App\" />
-      <sourceFolder url="file://$MODULE_DIR$/ci-app/app" isTestSource="false" packagePrefix="App\" />
       <sourceFolder url="file://$MODULE_DIR$/ci-app/app/Config" isTestSource="false" packagePrefix="Config\" />
-      <sourceFolder url="file://$MODULE_DIR$/ci-app/app/Config" isTestSource="false" packagePrefix="Config\" />
-      <sourceFolder url="file://$MODULE_DIR$/ci-app/tests/_support" isTestSource="true" packagePrefix="Tests\Support\" />
       <sourceFolder url="file://$MODULE_DIR$/ci-app/tests/_support" isTestSource="true" packagePrefix="Tests\Support\" />
     </content>
     <orderEntry type="inheritedJdk" />

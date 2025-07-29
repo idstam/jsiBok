@@ -64,14 +64,14 @@ class VoucherTemplateModel extends Model
         $missingDim = [];
 
         foreach($template->rows as $row){
-            $account = $cam->where(['account_id' =>$row->account_id])->first();
-            if(is_null($account))
-            {
-                //TODO:Handle account both from base and company accounts
-                array_push($missingDim,"Konto $row->account_id finns inte i kontoplanen.");
-            }
-            else{
-                $row->account_id  = $account->account_id;
+            if( $row->account_id !== "") {
+                $account = $cam->where(['account_id' => $row->account_id])->first();
+                if (is_null($account)) {
+                    //TODO:Handle account both from base and company accounts
+                    array_push($missingDim, "Konto $row->account_id finns inte i kontoplanen.");
+                } else {
+                    $row->account_id = $account->account_id;
+                }
             }
         }
 
