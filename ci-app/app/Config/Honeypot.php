@@ -22,7 +22,7 @@ class Honeypot extends BaseConfig
     public string $name = 'honeypot';
 
     /**
-     * Honeypot HTML VouchTemplate
+     * Honeypot HTML Template
      */
     public string $template = '<label>{label}</label><input type="text" name="{name}" value="">';
 
