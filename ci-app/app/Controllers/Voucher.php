@@ -325,7 +325,7 @@ class Voucher extends BaseController
         // Get template ID and amount from form submission
         $templateId = $this->request->getPost('tname');
         $tamount = $this->request->getPost('tamount');
-
+        $tamount = str_replace(',', '.', $tamount);
         // Load the template
         $vtm = model('App\Models\VoucherTemplateModel');
         $template = $vtm->find($templateId);
