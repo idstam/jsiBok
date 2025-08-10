@@ -57,3 +57,10 @@ DIV holders for info, success, warning, error and validation messages
     background-color: #FFBABA;
     /*  background-image: url('../images/error.png'); */
 }
+
+.number {
+    text-align:right;
+}
+.bold{
+    font-weight: bold;
+}

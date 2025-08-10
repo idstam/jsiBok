@@ -20,7 +20,7 @@
                 <label for="password">Lösenord</label>
             </div>
             <div class="col-sm-2">
-                <input type="password" id="password" name="password" style="padding: calc(var(--universal-padding) / 2);" />
+                <input type="password" id="password" name="password" />
             </div>
         </div>
         <div class="row">
@@ -28,7 +28,7 @@
                 <label for="password2" >Repetera lösenord</label>
             </div>
             <div class="col-sm-2">
-                <input type="password" id="password2" name="password2" style="padding: calc(var(--universal-padding) / 2);" />
+                <input type="password" id="password2" name="password2"  />
             </div>
         </div>
         <div class="row">
@@ -36,7 +36,7 @@
                 &nbsp;
             </div>
             <div class="col-sm-1">
-                <input class="tertiary" type="submit" id="submit" name="submit" value="Spara" style="padding: calc(var(--universal-padding) / 2);" />
+                <input class="tertiary" type="submit" id="submit" name="submit" value="Spara"  />
             </div>
     </div>
 

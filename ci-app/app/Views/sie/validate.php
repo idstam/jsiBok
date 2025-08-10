@@ -27,7 +27,7 @@
             <div class="grid">
                 <label for="sie_ib">Läs in ingående balanser
                     <input type="checkbox" id="sie_ib" name="sie_ib" checked
-                           style="padding: calc(var(--universal-padding) / 2);"/></label>
+                           /></label>
             </div>
         <?php } ?>
         <?php
@@ -37,26 +37,26 @@
                     - <?= $rar->End->format("Ymd") ?>
                     <input type="checkbox" id="sie_rar-<?= $rar->ID ?>"
                            name="sie_rar-<?= $rar->ID ?>" <?= $rar->ID == '0' ? 'disabled' : '' ?> checked
-                           style="padding: calc(var(--universal-padding) / 2);"/>
+                           />
                 </label>
             </div>
         <?php } ?>
         <!-- <div class="row">
             <div class="col-sm-12">
                 <label for="sie_ib">Använd kontonamn från filen i stället för BAS-kontoplanen</label>
-                <input type="checkbox" id="sie_account_names" name="sie_account_names" style="padding: calc(var(--universal-padding) / 2);" />
+                <input type="checkbox" id="sie_account_names" name="sie_account_names"  />
             </div>
         </div> -->
         <hr>
         <?php
         foreach ($sie_series as $serie => $count) { ?>
-            <!-- För serie <label><?= $serie ?></label> i filen; använd: <input type="text" list="dl_series" id="sie_serie-<?= $serie ?>" name="sie_serie-<?= $serie ?>" value="<?= $serie ?>" style="padding: calc(var(--universal-padding) / 2);" /> i bokföringen. -->
+            <!-- För serie <label><?= $serie ?></label> i filen; använd: <input type="text" list="dl_series" id="sie_serie-<?= $serie ?>" name="sie_serie-<?= $serie ?>" value="<?= $serie ?>" /> i bokföringen. -->
         <div class="grid">
             <label> För serie <?= $serie ?> i filen; använd:</label> <select list="dl_series"
                                                                             id="sie_serie-<?= $serie ?>"
                                                                             name="sie_serie-<?= $serie ?>"
                                                                             value="<?= $serie ?>"
-                                                                            style="padding: calc(var(--universal-padding) / 2);">
+                                                                            >
                 <?php
                 echo('<option label="' . esc($serie) . '" value="' . esc($serie) . '" ></option>');
 
@@ -69,8 +69,8 @@
             </select> i bokföringen.
         <?php } ?>
         </div>
-        <div class="grid">
-        <input type="submit" id="submit" name="submit" value="Importera" aria-busy="true" onclick="loading('submit')"/>
+        <div id="sie_validate_spinner" class="grid" aria-busy="false">
+        <input type="submit" id="submit" name="submit" value="Importera"  />
             <span></span>
         </div>
     </fieldset>

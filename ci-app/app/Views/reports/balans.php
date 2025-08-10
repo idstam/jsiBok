@@ -30,16 +30,16 @@ function level1sum($title, $in_amount_sum1, $p_amount_sum1, $ut_amount_sum1): vo
 { ?>
     <tr>
         <td>
-            <h4 style="font-weight: bold;">Summa <?= $title ?></h4>
+            <h4 class="bold ">Summa <?= $title ?></h4>
         </td>
         <td class="number">
-            <h4 style="font-weight: bold;"><?= format_bc($in_amount_sum1) ?></h4>
+            <h4 class="bold" ><?= format_bc($in_amount_sum1) ?></h4>
         </td>
         <td class="number">
-            <h4 style="font-weight: bold;"><?= format_bc($p_amount_sum1) ?></h4>
+            <h4 class="bold"><?= format_bc($p_amount_sum1) ?></h4>
         </td>
         <td class="number">
-            <h4 style="font-weight: bold;"><?= format_bc($ut_amount_sum1) ?></h4>
+            <h4 class="bold"><?= format_bc($ut_amount_sum1) ?></h4>
         </td>
     </tr>
 
@@ -47,15 +47,15 @@ function level1sum($title, $in_amount_sum1, $p_amount_sum1, $ut_amount_sum1): vo
 function level2sum($title, $in_amount_sum2, $p_amount_sum2, $ut_amount_sum2): void
 { ?>
     <tr>
-        <td style="font-weight: bold; padding-left: 2em;">Summa <?= $title ?></td>
+        <td class="bold">&nbsp;&nbsp;Summa <?= $title ?></td>
         <td class="number">
-            <label style="font-weight: bold;"><?= format_bc($in_amount_sum2) ?></label>
+            <label class="bold"><?= format_bc($in_amount_sum2) ?></label>
         </td>
         <td class="number">
-            <label style="font-weight: bold;"><?= format_bc($p_amount_sum2) ?></label>
+            <label class="bold"><?= format_bc($p_amount_sum2) ?></label>
         </td>
         <td class="number">
-            <label style="font-weight: bold;"><?= format_bc($ut_amount_sum2) ?></label>
+            <label class="bold"><?= format_bc($ut_amount_sum2) ?></label>
         </td>
     </tr>
 
@@ -141,7 +141,7 @@ function level2sum($title, $in_amount_sum2, $p_amount_sum2, $ut_amount_sum2): vo
         } ?>
 
         <tr>
-                <td style="padding-left: 2em;"><?= $row->account_id ?>&nbsp;<?= $row->account_name ?></td>
+                <td >&nbsp;&nbsp;<?= $row->account_id ?>&nbsp;<?= $row->account_name ?></td>
                 <td class="number"><?= format_bc($in_amount) ?></td>
                 <td class="number"><?= format_bc($p_amount) ?></td>
                 <td class="number"><?= format_bc($ut_amount) ?></td>

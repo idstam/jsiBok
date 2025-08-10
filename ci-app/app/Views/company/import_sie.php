@@ -10,7 +10,7 @@ $toNewCompanyChecked = count($companies) == 0 ? " checked disabled " : '';
                 count($companies) == 0 ? 'till nytt företag' : '' ?></strong></legend>
     <div class="grid">
         <input type="file" id="sie_file" name="sie_file" size="15"
-               style="padding: calc(var(--universal-padding) / 2);"/>
+               />
 
             <label for="chk_to_new_company">Till&nbsp;nytt&nbsp;företag
                 <input id="chk_to_new_company"

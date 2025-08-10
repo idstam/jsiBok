@@ -20,6 +20,8 @@
 
 </head>
 <body>
+<!-- Environment: <?= ENVIRONMENT ?> -->
+<!-- Deploy instance: <?= getEnv('deploy.instance') ?> -->
 <header>
     <?php
 helper('jsi_helper');
@@ -81,7 +83,7 @@ $home_caption = "huvudboken.se";
             <?= !$session->has('userID') ? '<li><strong><a class="outline" href="/login">Logga in</a></strong></li>' : "" ?>
 
 
-            <?= $session->has('companyName') ? '<li><strong><a class="outline" href="/company">Företag</a></strong></li>' : "" ?>
+            <?= $session->has('userID') ? '<li><strong><a class="outline" href="/company">Företag</a></strong></li>' : "" ?>
 
             <?= $session->has('companyName') ? '<li><strong><a class="outline" href="/voucher" >Bokföring</a></strong></li>' : "" ?>
             <?= $session->has('companyName') ? '<li><strong><a class="outline" href="/reports" >Rapporter</a></strong></li>' : "" ?>

@@ -57,50 +57,39 @@ echo('</datalist>');
                 <?php foreach ($voucher->rows as $index => $row): ?>
                 <tr class="voucher_row">
                     <th><input list="dl_accounts" id="vr_account-<?= $index ?>" name="vr_account-<?= $index ?>" class="voucher_row_field" size="10"
-                               value="<?= esc($row->account_id) ?>" style="padding: calc(var(--universal-padding) / 2);"/></th>
+                               value="<?= esc($row->account_id) ?>" /></th>
                     <th><input type="text" id="vr_costcenter-<?= $index ?>" name="vr_costcenter-<?= $index ?>" class="voucher_row_field" size="10"
-                               value="<?= ($row->cost_center_id == 0) ? '' : esc($row->cost_center_id) ?>" style="padding: calc(var(--universal-padding) / 2);"/></th>
+                               value="<?= ($row->cost_center_id == 0) ? '' : esc($row->cost_center_id) ?>" /></th>
                     <th><input type="text" id="vr_project-<?= $index ?>" name="vr_project-<?= $index ?>" class="voucher_row_field" size="10"
-                               value="<?= ($row->project_id == 0) ? '' : esc($row->project_id) ?>" style="padding: calc(var(--universal-padding) / 2);"/></th>
-                    <th><input type="text" id="vr_debet-<?= $index ?>" name="vr_debet-<?= $index ?>" class="voucher_row_field" size="15"
-                               value="<?= $row->amount > 0 ? format_bc($row->amount) : '' ?>" style="padding: calc(var(--universal-padding) / 2); text-align: right;"/></th>
-                    <th><input type="text" id="vr_kredit-<?= $index ?>" name="vr_kredit-<?= $index ?>" class="voucher_row_field" size="15"
-                               value="<?= $row->amount < 0 ? format_bc(abs($row->amount)) : '' ?>" style="padding: calc(var(--universal-padding) / 2); text-align: right;"/></th>
+                               value="<?= ($row->project_id == 0) ? '' : esc($row->project_id) ?>" /></th>
+                    <th><input type="text" id="vr_debet-<?= $index ?>" name="vr_debet-<?= $index ?>" class="voucher_row_field number" size="15"
+                               value="<?= $row->amount > 0 ? format_bc($row->amount) : '' ?>" /></th>
+                    <th><input type="text" id="vr_kredit-<?= $index ?>" name="vr_kredit-<?= $index ?>" class= "voucher_row_field number" size="15"
+                               value="<?= $row->amount < 0 ? format_bc(abs($row->amount)) : '' ?>" /></th>
                     <th>
                         <?php if ($index === count($voucher->rows) - 1): ?>
-                            <input class="primary new_row_button" type="button" name="new_row" value="Ny rad" onclick="new_voucher_row();"/>
+                            <input id="incoming_balance_new_row_01" class="primary new_row_button" type="button" name="new_row" value="Ny rad" />
                         <?php endif; ?>
                     </th>
                 </tr>
                 <?php endforeach; ?>
             <?php else: ?>
                 <tr class="voucher_row">
-                    <th><input list="dl_accounts" id="vr_account-0" name="vr_account-0" class="voucher_row_field" size="10"
-                               style="padding: calc(var(--universal-padding) / 2);"/></th>
-                    <th><input type="text" id="vr_costcenter-0" name="vr_costcenter-0" class="voucher_row_field" size="10"
-                               style="padding: calc(var(--universal-padding) / 2);"/></th>
-                    <th><input type="text" id="vr_project-0" name="vr_project-0" class="voucher_row_field" size="10"
-                               style="padding: calc(var(--universal-padding) / 2);"/></th>
-                    <th><input type="text" id="vr_debet-0" name="vr_debet-0" class="voucher_row_field" size="15"
-                               style="padding: calc(var(--universal-padding) / 2); text-align: right;"/></th>
-                    <th><input type="text" id="vr_kredit-0" name="vr_kredit-0" class="voucher_row_field" size="15"
-                               style="padding: calc(var(--universal-padding) / 2); text-align: right;"/></th>
+                    <th><input list="dl_accounts" id="vr_account-0" name="vr_account-0" class="voucher_row_field" size="10"/></th>
+                    <th><input type="text" id="vr_costcenter-0" name="vr_costcenter-0" class="voucher_row_field" size="10"/></th>
+                    <th><input type="text" id="vr_project-0" name="vr_project-0" class="voucher_row_field" size="10"/></th>
+                    <th><input type="text" id="vr_debet-0" name="vr_debet-0" class="voucher_row_field number" size="15"/></th>
+                    <th><input type="text" id="vr_kredit-0" name="vr_kredit-0" class="voucher_row_field number" size="15"/></th>
                     <th>
                     </th>
                 </tr>
                 <tr class="voucher_row">
-                    <th><input list="dl_accounts" id="vr_account-1" name="vr_account-1" class="voucher_row_field" size="10"
-                               style="padding: calc(var(--universal-padding) / 2);"/></th>
-                    <th><input type="text" id="vr_costcenter-1" name="vr_costcenter-1" class="voucher_row_field" size="10"
-                               style="padding: calc(var(--universal-padding) / 2);"/></th>
-                    <th><input type="text" id="vr_project-1" name="vr_project-1" class="voucher_row_field" size="10"
-                               style="padding: calc(var(--universal-padding) / 2);"/></th>
-                    <th><input type="text" id="vr_debet-1" name="vr_debet-1" class="voucher_row_field" size="15"
-                               style="padding: calc(var(--universal-padding) / 2); text-align: right;"/></th>
-                    <th><input type="text" id="vr_kredit-1" name="vr_kredit-1" class="voucher_row_field" size="15"
-                               style="padding: calc(var(--universal-padding) / 2); text-align: right;"/></th>
-                    <th><input class="primary new_row_button" type="button" name="new_row" value="Ny rad" onclick="new_voucher_row();"/>
-                    </th>
+                    <th><input list="dl_accounts" id="vr_account-1" name="vr_account-1" class="voucher_row_field" size="10"/></th>
+                    <th><input type="text" id="vr_costcenter-1" name="vr_costcenter-1" class="voucher_row_field" size="10"/></th>
+                    <th><input type="text" id="vr_project-1" name="vr_project-1" class="voucher_row_field" size="10"/></th>
+                    <th><input type="text" id="vr_debet-1" name="vr_debet-1" class="voucher_row_field number" size="15"/></th>
+                    <th><input type="text" id="vr_kredit-1" name="vr_kredit-1" class="voucher_row_field number" size="15"/></th>
+                    <th><input id="incoming_balance_new_row_02" class="primary new_row_button" type="button" name="new_row" value="Ny rad" /></th>
                 </tr>
             <?php endif; ?>
             </tbody>

@@ -49,7 +49,7 @@ echo('</datalist>');
             <label for="vserie">Serie
         <input type="text" list="dl_series" id="vserie" name="vserie"
                value="<?= esc($values['default_series']->string_value) ?>"
-               style="padding: calc(var(--universal-padding) / 2);"/></label>
+               /></label>
             <details name="example" closed>
                 <summary>Instruktion</summary>
                 <p>
@@ -64,7 +64,7 @@ echo('</datalist>');
         </div>
         <label for="vtitle">Rubrik</label>
         <input type="text" id="vtitle" name="vtitle"
-               style="padding: calc(var(--universal-padding) / 2);"/>
+               />
 
         <hr/>
         <table>
@@ -82,30 +82,30 @@ echo('</datalist>');
             <tbody>
             <tr class="voucher_row">
                 <th><input list="dl_accounts" id="vr_account-0" name="vr_account-0" class="voucher_row_field" size="10"
-                           style="padding: calc(var(--universal-padding) / 2);"/></th>
+                           /></th>
                 <th><input type="text" id="vr_costcenter-0" name="vr_costcenter-0" class="voucher_row_field" size="10"
-                           style="padding: calc(var(--universal-padding) / 2);"/></th>
+                           /></th>
                 <th><input type="text" id="vr_project-0" name="vr_project-0" class="voucher_row_field" size="10"
-                           style="padding: calc(var(--universal-padding) / 2);"/></th>
+                           /></th>
                 <th><input type="text" id="vr_debet-0" name="vr_debet-0" class="voucher_row_field" size="15"
-                           style="padding: calc(var(--universal-padding) / 2);"/></th>
+                           /></th>
                 <th><input type="text" id="vr_kredit-0" name="vr_kredit-0" class="voucher_row_field" size="15"
-                           style="padding: calc(var(--universal-padding) / 2);"/></th>
+                           /></th>
                 <th>
                 </th>
             </tr>
             <tr class="voucher_row">
                 <th><input list="dl_accounts" id="vr_account-1" name="vr_account-1" class="voucher_row_field" size="10"
-                           style="padding: calc(var(--universal-padding) / 2);"/></th>
+                           /></th>
                 <th><input type="text" id="vr_costcenter-1" name="vr_costcenter-1" class="voucher_row_field" size="10"
-                           style="padding: calc(var(--universal-padding) / 2);"/></th>
+                           /></th>
                 <th><input type="text" id="vr_project-1" name="vr_project-1" class="voucher_row_field" size="10"
-                           style="padding: calc(var(--universal-padding) / 2);"/></th>
+                           /></th>
                 <th><input type="text" id="vr_debet-1" name="vr_debet-1" class="voucher_row_field" size="15"
-                           style="padding: calc(var(--universal-padding) / 2);"/></th>
+                           /></th>
                 <th><input type="text" id="vr_kredit-1" name="vr_kredit-1" class="voucher_row_field" size="15"
-                           style="padding: calc(var(--universal-padding) / 2);"/></th>
-                <th><input class="primary new_row_button" type="button" name="new_row" value="Ny rad" onclick="new_voucher_row();"/>
+                           /></th>
+                <th><input id="edit_voucher_template_new_row" class="primary new_row_button" type="button" name="new_row" value="Ny rad" />
                 </th>
             </tr>
             </tbody>
