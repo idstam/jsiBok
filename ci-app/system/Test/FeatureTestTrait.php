@@ -164,7 +164,6 @@ trait FeatureTestTrait
      */
     public function call(string $method, string $path, ?array $params = null)
     {
-  
         if ($method === strtolower($method)) {
             @trigger_error(
                 'Passing lowercase HTTP method "' . $method . '" is deprecated.'
@@ -186,9 +185,7 @@ trait FeatureTestTrait
         $request = $this->setupRequest($method, $path);
         $request = $this->setupHeaders($request);
         $name    = strtolower($method);
-        
         $request = $this->populateGlobals($name, $request, $params);
-        
         $request = $this->setRequestBody($request, $params);
 
         // Initialize the RouteCollection
@@ -210,7 +207,6 @@ trait FeatureTestTrait
         // Make sure validation is reset between tests
         Services::injectMock('validation', service('validation', null, false));
 
-        
         $response = $this->app
             ->setContext('web')
             ->setRequest($request)
@@ -384,10 +380,9 @@ trait FeatureTestTrait
         if ($name === 'get') {
             $request->setGlobal('request', $request->fetchGlobal('get'));
         }
-        
+
         if ($name === 'post') {
             $request->setGlobal($name, $params);
-            
             $request->setGlobal(
                 'request',
                 $request->fetchGlobal('post') + $request->fetchGlobal('get'),
@@ -411,7 +406,7 @@ trait FeatureTestTrait
         if ($this->requestBody !== '') {
             $request->setBody($this->requestBody);
         }
-        
+
         if ($this->bodyFormat !== '') {
             $formatMime = '';
             if ($this->bodyFormat === 'json') {

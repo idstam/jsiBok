@@ -76,5 +76,8 @@ app.slackUrl = 'the slack url'
 
 mailgun.key = 'mailgun-key'
 
+#This will be set as an html comment in the header. I use green/blue deployment and wanted to se what is linked to production
+deploy.instance = 'green'
+
 #Set this to true if you want users to be able so self register for accounts
 app.user.selfRegistration = 'off'
