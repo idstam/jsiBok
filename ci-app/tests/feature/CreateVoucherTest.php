@@ -29,25 +29,17 @@ class CreateVoucherTest extends CIUnitTestCase
         $driver = $db->DBDriver;
 
         foreach (['company_voucher_rows', 'company_vouchers', 'company_users',
-                     'company_voucher_series', 'company_booking_years', 'company_values',
+                     'company_voucher_series_values','company_voucher_series', 'company_booking_years',
+                     'company_values',
                      'company_account_vat_sru', 'company_booking_accounts', 'companies'] as $tableName) {
             $builder = $db->table($tableName);
             try {
                 // Disable foreign key checks based on database driver
-                if ($driver == 'MySQLi') {
-                    $db->simpleQuery('SET FOREIGN_KEY_CHECKS = 0;');
-                } elseif ($driver == 'SQLite3') {
-                    $db->simpleQuery('PRAGMA foreign_keys = OFF;');
-                }
-
+                $db->simpleQuery('SET FOREIGN_KEY_CHECKS = 0;');
                 $builder->truncate();
 
                 // Re-enable foreign key checks based on database driver
-                if ($driver == 'MySQLi') {
-                    $db->simpleQuery('SET FOREIGN_KEY_CHECKS = 1;');
-                } elseif ($driver == 'SQLite3') {
-                    $db->simpleQuery('PRAGMA foreign_keys = ON;');
-                }
+                $db->simpleQuery('SET FOREIGN_KEY_CHECKS = 1;');
             } catch (\Exception $e) {
                 d($e);
                 dd($tableName);
@@ -128,7 +120,8 @@ class CreateVoucherTest extends CIUnitTestCase
 
     public function testCreateSimpleVoucher()
     {
-        $nextVoucherNumberPre = $this->grabFromDatabase('company_voucher_series', 'next', ['company_id' => $this->companyID, 'name' => 'V']);
+        $seriesID = $this->grabFromDatabase('company_voucher_series', 'id', ['company_id' => $this->companyID, 'name' => 'V']);
+        $nextVoucherNumberPre = $this->grabFromDatabase('company_voucher_series_values', 'next', ['company_id' => $this->companyID, 'id' => $seriesID, 'booking_year_id' => $this->bookingYearID]);
 
         $title = uniqid();
         $data = [
@@ -151,7 +144,8 @@ class CreateVoucherTest extends CIUnitTestCase
         $this->seeInDatabase('company_vouchers', ['title' => $title]);
         $voucherID = $this->grabFromDatabase('company_vouchers', 'id', ['title' => $title]);
 
-        $this->seeInDatabase('company_voucher_series', ['company_id' => $this->companyID, 'name' => 'V', 'next' => $nextVoucherNumberPre + 1]);
+        $seriesID = $this->grabFromDatabase('company_voucher_series', 'id', ['company_id' => $this->companyID, 'name'=>'V']);
+        $this->seeInDatabase('company_voucher_series_values', ['company_id' => $this->companyID, 'id' => $seriesID, 'next' => $nextVoucherNumberPre + 1]);
 
         for ($i = 0; $i < count($rows); $i++) {
             if ($rows[$i]['debet'] > 0) {
@@ -164,7 +158,8 @@ class CreateVoucherTest extends CIUnitTestCase
 
     public function testCreateVoucherUnbalanced()
     {
-        $nextVoucherNumberPre = $this->grabFromDatabase('company_voucher_series', 'next', ['company_id' => $this->companyID, 'name' => 'V']);
+        $seriesID = $this->grabFromDatabase('company_voucher_series', 'id', ['company_id' => $this->companyID, 'name' => 'V']);
+        $nextVoucherNumberPre = $this->grabFromDatabase('company_voucher_series_values', 'next', ['company_id' => $this->companyID, 'id' => $seriesID, 'booking_year_id' => $this->bookingYearID]);
 
         $title = uniqid();
         $data = [
@@ -187,14 +182,15 @@ class CreateVoucherTest extends CIUnitTestCase
         $this->dontSeeInDatabase('company_vouchers', ['title' => $title]);
 
         //Since this should fail the voucher number should not be incremented
-        $this->seeInDatabase('company_voucher_series', ['company_id' => $this->companyID, 'name' => 'V', 'next' => $nextVoucherNumberPre]);
+        $this->seeInDatabase('company_voucher_series_values', ['company_id' => $this->companyID, 'id' => $seriesID, 'booking_year_id' => $this->bookingYearID, 'next' => $nextVoucherNumberPre]);
 
         $result->assertSee('Verifikatet är inte i balans. Diff: 500.00');
     }
 
     public function testCreateVoucherOutsideOfYear()
     {
-        $nextVoucherNumberPre = $this->grabFromDatabase('company_voucher_series', 'next', ['company_id' => $this->companyID, 'name' => 'V']);
+        $seriesID = $this->grabFromDatabase('company_voucher_series', 'id', ['company_id' => $this->companyID, 'name' => 'V']);
+        $nextVoucherNumberPre = $this->grabFromDatabase('company_voucher_series_values', 'next', ['company_id' => $this->companyID, 'id' => $seriesID, 'booking_year_id' => $this->bookingYearID]);
 
         $title = uniqid();
         $data = [
@@ -217,14 +213,15 @@ class CreateVoucherTest extends CIUnitTestCase
         $this->dontSeeInDatabase('company_vouchers', ['title' => $title]);
 
         //Since this should fail the voucher number should not be incremented
-        $this->seeInDatabase('company_voucher_series', ['company_id' => $this->companyID, 'name' => 'V', 'next' => $nextVoucherNumberPre]);
+        $this->seeInDatabase('company_voucher_series_values', ['company_id' => $this->companyID, 'id' => $seriesID, 'booking_year_id' => $this->bookingYearID, 'next' => $nextVoucherNumberPre]);
 
         $result->assertSee('Det finns inget bokföringsår för');
     }
 
     public function testCreateVoucherNegativeDebetAmount()
     {
-        $nextVoucherNumberPre = $this->grabFromDatabase('company_voucher_series', 'next', ['company_id' => $this->companyID, 'name' => 'V']);
+        $seriesID = $this->grabFromDatabase('company_voucher_series', 'id', ['company_id' => $this->companyID, 'name' => 'V']);
+        $nextVoucherNumberPre = $this->grabFromDatabase('company_voucher_series_values', 'next', ['company_id' => $this->companyID, 'id' => $seriesID, 'booking_year_id' => $this->bookingYearID]);
 
         $title = uniqid();
         $data = [
@@ -250,7 +247,9 @@ class CreateVoucherTest extends CIUnitTestCase
         $this->seeInDatabase('company_vouchers', ['title' => $title]);
         $voucherID = $this->grabFromDatabase('company_vouchers', 'id', ['title' => $title]);
 
-        $this->seeInDatabase('company_voucher_series', ['company_id' => $this->companyID, 'name' => 'V', 'next' => $nextVoucherNumberPre + 1]);
+        $seriesID = $this->grabFromDatabase('company_voucher_series', 'id', ['company_id' => $this->companyID, 'name'=>'V']);
+        $this->seeInDatabase('company_voucher_series_values', ['company_id' => $this->companyID, 'id' => $seriesID, 'next' => $nextVoucherNumberPre + 1]);
+
         for ($i = 0; $i < count($rows); $i++) {
             if ($rows[$i]['debet'] != 0) {
                 $this->seeInDatabase('company_voucher_rows', ['voucher_id' => $voucherID, 'account_id' => $rows[$i]['account'], 'amount' => abs($rows[$i]['debet'])]); //Note the abs()

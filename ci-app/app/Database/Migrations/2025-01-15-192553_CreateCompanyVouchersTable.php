@@ -70,7 +70,7 @@ class CreateCompanyVouchersTable extends Migration
         $this->forge->addForeignKey(['user_id'], 'users', ['id']);
         $this->forge->addForeignKey(['company_id', 'serie'], 'company_voucher_series', ['company_id', 'name']);
 
-        $this->forge->addUniqueKey(['company_id','serie', 'voucher_number'], 'voucher_number_UDX');
+        $this->forge->addUniqueKey(['company_id','booking_year_id', 'serie', 'voucher_number'], 'voucher_number_UDX');
         $this->forge->createTable('company_vouchers');
 
     }

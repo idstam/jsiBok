@@ -32,26 +32,18 @@ final class HuvudbokReportTest extends CIUnitTestCase
         $driver = $db->DBDriver;
 
         foreach(['company_account_balance', 'company_voucher_rows', 'company_vouchers',
-                    'company_users', 'company_voucher_series', 'company_booking_years',
+                    'company_users', 'company_voucher_series_values','company_voucher_series',
+                    'company_booking_years',
                     'company_values', 'company_account_vat_sru', 'company_booking_accounts',
                     'companies'] as $tableName){
             $builder = $db->table($tableName);
             try {
                 // Disable foreign key checks based on database driver
-                if ($driver == 'MySQLi') {
-                    $db->simpleQuery('SET FOREIGN_KEY_CHECKS = 0;');
-                } elseif ($driver == 'SQLite3') {
-                    $db->simpleQuery('PRAGMA foreign_keys = OFF;');
-                }
-
+                $db->simpleQuery('SET FOREIGN_KEY_CHECKS = 0;');
                 $builder->truncate();
 
                 // Re-enable foreign key checks based on database driver
-                if ($driver == 'MySQLi') {
-                    $db->simpleQuery('SET FOREIGN_KEY_CHECKS = 1;');
-                } elseif ($driver == 'SQLite3') {
-                    $db->simpleQuery('PRAGMA foreign_keys = ON;');
-                }
+                $db->simpleQuery('SET FOREIGN_KEY_CHECKS = 1;');
             } catch (\Exception $e) {
                 d($e);
                 dd($tableName);

@@ -26,11 +26,6 @@ class CreateCompanyVoucherSeriesTable extends Migration
                 'type'       => 'VARCHAR',
                 'constraint' => '250',
             ],
-            'next'          => [
-                'type'           => 'INT',
-                'unsigned'       => true,
-                'default'       => 1
-            ],
             'created_at'       => [
                 'type'       => 'DATETIME',
                 'null'        => true,

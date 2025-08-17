@@ -28,24 +28,16 @@ class CreateCompanyTest extends CIUnitTestCase
         $db = \Config\Database::connect();
         $dbDriver = $db->DBDriver;
 
-        foreach(['company_vouchers', 'company_users', 'company_voucher_series',
+        foreach(['company_vouchers', 'company_users', 'company_voucher_series_values',
+                    'company_voucher_series',
                     'company_booking_years','company_values','company_account_vat_sru',
                     'companies'] as $tableName){
             $builder = $db->table($tableName);
             try {
                 // Handle different database drivers
-                if ($dbDriver === 'MySQLi') {
-                    $db->simpleQuery('SET FOREIGN_KEY_CHECKS = 0;');
-                    $builder->truncate();
-                    $db->simpleQuery('SET FOREIGN_KEY_CHECKS = 1;');
-                } elseif ($dbDriver === 'SQLite3') {
-                    $db->simpleQuery('PRAGMA foreign_keys = OFF;');
-                    $builder->truncate();
-                    $db->simpleQuery('PRAGMA foreign_keys = ON;');
-                } else {
-                    // For other database drivers, just try truncate
-                    $builder->truncate();
-                }
+                $db->simpleQuery('SET FOREIGN_KEY_CHECKS = 0;');
+                $builder->truncate();
+                $db->simpleQuery('SET FOREIGN_KEY_CHECKS = 1;');
             } catch (\Exception $e) {
                 d($e);
                 dd($tableName);
@@ -135,6 +127,11 @@ class CreateCompanyTest extends CIUnitTestCase
         $this->seeInDatabase('companies', ['name'=> $name]);
         $number = $this->grabFromDatabase('companies', 'number', ['name' => $name]);
         $id = $this->grabFromDatabase('companies', 'id', ['name' => $name]);
+
+        $this->seeInDatabase('company_voucher_series', ['company_id' => $id, 'name' => 'V']);
+        $voucherSeriesID = $this->grabFromDatabase('company_voucher_series', 'id', ['company_id' => $id, 'name' => 'V']);
+
+        $this->seeInDatabase('company_voucher_series_values', ['company_id' => $id, 'voucher_series_id' => $voucherSeriesID]);
 
         $this->seeInDatabase('company_values', ['company_id' => $id, 'name' => 'default_series']);
 

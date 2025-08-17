@@ -105,11 +105,7 @@ class CompaniesModel extends Model
             $cavs->CopyVatSru($companyID, 0);
 
             $vs = model('App\Models\CompanyVoucherSeriesModel');
-            $vs->insert([
-                'company_id' => $companyID,
-                'name' => 'V',
-                'title' => 'Verifikationer',
-            ]);
+            $serieID = $vs->ensureVoucherSeries($companyID, 'V', 'Verifikationer', $yearID);
 
             $cv = model('App\Models\CompanyValuesModel');
             $cv->insert([

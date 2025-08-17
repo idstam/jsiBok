@@ -56,7 +56,6 @@ class VoucherModel extends Model
             return $voucher;
         }
 
-
         $cam = model('App\Models\CompanyBookingAccountsModel');
         if(!$cam->ensureCompanyAccountsExists($voucher)){
             return $voucher;
@@ -90,10 +89,13 @@ class VoucherModel extends Model
                 'company_id' => $voucher->company_id,
                     'name' => $voucher->serie])->first();
 
-            $vsm->update($voucherSerie->id,['next' => $voucherSerie->next +1]);
+            $vsmv = model('App\Models\CompanyVoucherSeriesValuesModel');
+            $seriesValue = $vsmv->where(['voucher_series_id' => $voucherSerie->id, 'booking_year_id' => $voucher->booking_year_id])->first();
+
+            $vsmv->update($seriesValue->id,['next' => $seriesValue->next +1]);
 
             //Set the voucher header            
-            $voucher->voucher_number = $voucherSerie->next;
+            $voucher->voucher_number = $seriesValue->next;
             
             //Save the voucher
             $voucher->voucher_date = ensure_date_string($voucher->voucher_date, 'Y-m-d');

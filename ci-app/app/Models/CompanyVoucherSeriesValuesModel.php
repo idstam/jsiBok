@@ -4,9 +4,9 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class CompanyVoucherSeriesNumbersModel extends Model
+class CompanyVoucherSeriesValuesModel extends Model
 {
-    protected $table            = 'company_voucher_series_numbers';
+    protected $table            = 'company_voucher_series_values';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'object';
@@ -43,4 +43,26 @@ class CompanyVoucherSeriesNumbersModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function ensureVoucherSeriesValues($companyID, $bookingYearID)
+    {
+        $vs = model('App\Models\CompanyVoucherSeriesModel');
+        $allSeries = $vs->where('company_id', $companyID)->findAll();
+        foreach ($allSeries as $series) {
+            $this->ensureVoucherSeriesValue($companyID, $series->id, $bookingYearID);
+        }
+    }
+    public function ensureVoucherSeriesValue($companyID, $seriesID, $bookingYearID)
+    {
+        $seriesValue = $this->where(['voucher_series_id' => $seriesID, 'booking_year_id' => $bookingYearID])->first();
+        if(is_null($seriesValue)){
+            $this->insert([
+                'company_id' => $companyID,
+                'booking_year_id' => $bookingYearID,
+                'voucher_series_id' => $seriesID,
+                'next' => 1,
+            ]);
+        }
+    }
+
 }

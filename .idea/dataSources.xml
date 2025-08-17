@@ -18,6 +18,7 @@
     <data-source source="LOCAL" name="TEST_huvudboken" uuid="dc1ff779-5e40-445f-8c14-7c4cd8da4888">
       <driver-ref>mariadb</driver-ref>
       <synchronize>true</synchronize>
+      <isolation>1</isolation>
       <jdbc-driver>org.mariadb.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mariadb://localhost:3306/test_huvudboken</jdbc-url>
       <jdbc-additional-properties>

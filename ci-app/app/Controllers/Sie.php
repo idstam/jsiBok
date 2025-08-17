@@ -316,7 +316,6 @@ class Sie extends BaseController
             if (str_starts_with($name, 'sie_serie-')) {
                 $sieSerie = str_replace('sie_serie-', '', $name);
                 $mappings[$sieSerie] = $value;
-
             }
         }
 
@@ -324,16 +323,9 @@ class Sie extends BaseController
 
         foreach ($doc->Series as $name => $count) {
             if ($mappings[$name] == $name) {
-                $data = [
-                    'company_id' => $companyID,
-                    'name' => $name,
-                    'title' => $name . ' importerad',
-                ];
-
-                $result = $vs->ignore(true)->insert($data);
-//                if (!$result) {
-//                    return false;
-//                }
+                foreach($this->bookingYears as $year => $data ) {
+                    $vs->ensureVoucherSeries($companyID, $name, $name . ' importerad', $year);
+                }
             }
         }
 

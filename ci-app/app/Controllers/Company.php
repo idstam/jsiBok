@@ -141,10 +141,12 @@ class Company extends BaseController
         $by->where('company_id', $this->session->get('companyID'))->set(['active' => 0])->update()  ;
         //dd($postData);
 
-        $by->where('company_id', $this->session->get('companyID'))->where('id', $postData['booking_year'])->set(['active' => 1])->update()  ;
+        $newYearActive = array_key_exists('new_year_active', $postData) ? 1 : 0;
+        if ($newYearActive == 0) {
+            $by->where('company_id', $this->session->get('companyID'))->where('id', $postData['booking_year'])->set(['active' => 1])->update();
+        }
         $by->db->transComplete();
 
-        $newYearActive = array_key_exists('new_year_active', $postData) ? 1 : 0;
         if($postData['new_booking_year_start'] !== "" && $postData['new_booking_year_end'] !== "") {
             $by->insert([
                 'company_id' => $this->session->get('companyID'),
@@ -152,6 +154,10 @@ class Company extends BaseController
                 'year_end' => $postData['new_booking_year_end'],
                 'active' => $newYearActive
             ]);
+            $newYearID = $by->getInsertID();
+            $vsv = model('App\Models\CompanyVoucherSeriesValuesModel');
+            $vsv->ensureVoucherSeriesValues($this->session->get('companyID'), $newYearID);
+
             $this->journal->Write(
                 'Nytt bokföringsår',
                 $this->session->get('companyName') . '|' .
