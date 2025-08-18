@@ -380,9 +380,9 @@ class Sie extends BaseController
         if ($number) {
             $this->journal->Write(
                 'Nytt företag från SIE-fil',
-                $doc->FNAMN->Name . '|' .
-                ($doc->FNAMN->OrgIdentifier ?? '') . '|' .
-                $doc->RAR[0]->Start->format('Ymd') . '|' .
+                $doc->FNAMN->Name . '| ' .
+                ($doc->FNAMN->OrgIdentifier ?? '') . '| ' .
+                $doc->RAR[0]->Start->format('Ymd') . ' till ' .
                 $doc->RAR[0]->End->format('Ymd')
             );
             return $number;

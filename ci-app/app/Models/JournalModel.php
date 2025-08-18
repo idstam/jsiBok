@@ -63,4 +63,30 @@ class JournalModel extends Model
 
 
     }
+
+    /**
+     * Returns journal rows for a company and booking year with required fields for the journal report
+     *
+     * @param int|string $companyID
+     * @return array<object>
+     */
+    public function getJournalEntries($companyID)
+    {
+        $session = service('session');
+        $userID = $session->get('userID');
+        $sql = "
+    select 
+        j.*, 
+        u.name as user
+    from journal j 
+    inner join users u on j.user_id = u.id 
+    where j.company_id = ? or (j.company_id = 0 and j.user_id = ?)
+    order by j.created_at desc;
+        ";
+
+        $query = $this->db->query($sql, [$companyID, $userID]);
+        //dd($this->db->getLastQuery());
+        return $query;
+    }
+    
 }

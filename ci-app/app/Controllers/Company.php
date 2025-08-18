@@ -115,7 +115,7 @@ class Company extends BaseController
                 'Nytt företag',
                 $postData['name'] . '|' .
                     $postData['org_no'] . '|' .
-                    $postData['booking_year_start'] . '|' .
+                    $postData['booking_year_start'] . ' till ' .
                     $postData['booking_year_end']
             );
             return redirect()->to('/company/select/' . $number);
@@ -160,8 +160,7 @@ class Company extends BaseController
 
             $this->journal->Write(
                 'Nytt bokföringsår',
-                $this->session->get('companyName') . '|' .
-                $postData['new_booking_year_start'] . '|' .
+                $postData['new_booking_year_start'] . ' till ' .
                 $postData['new_booking_year_end']);
         }
 

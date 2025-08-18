@@ -58,6 +58,9 @@ class Reports extends BaseController
         if ($this->request->getGet('submitMoms')) {
             return $this->moms($this->session->get('companyID'), $year->id, $fromDate, $toDate, $tomDate);
         }
+        if ($this->request->getGet('submitJournal')) {
+            return $this->journal($this->session->get('companyID'), $year->id, $fromDate, $toDate, $tomDate);
+        }
 
         return redirect()->to('/reports');
     }
@@ -176,6 +179,28 @@ class Reports extends BaseController
         echo view('common/footer', $data);
         return '';
     }
+
+    private function journal($companyID, $bookingYear, $fromDate, $toDate, $tomDate): string|\CodeIgniter\HTTP\RedirectResponse
+    {
+        helper('jsi_helper');
+        $jm = model('App\Models\JournalModel');
+        $reportQuery = $jm->getJournalEntries($companyID, $bookingYear);
+
+        $data = [];
+        $data['title'] = 'Journal';
+        $data['reportName'] = 'Journal';
+        $data['description'] = 'DESCRIPTION  -------------';
+        $data['reportQuery'] = $reportQuery->getResult('object');
+        $data['fromDate'] = $fromDate;
+        $data['toDate'] = $toDate;
+
+        echo view('common/header', $data);
+        //echo view('reports/header', $data);
+        echo view('reports/journal', $data);
+        echo view('common/footer', $data);
+        return '';
+    }
+
 
     /**
      * @param object|array|null $year

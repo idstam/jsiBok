@@ -55,6 +55,7 @@ $months = array(
             <input class="primary" type="submit" id="submit1" name="submit1" value="Huvudbok"/>
             <input class="primary" type="submit" id="submit2" name="submit2" value="Resultaträkning"/>
             <input class="primary" type="submit" id="submit3" name="submit3" value="Balansräkning"/>
+            <input class="primary" type="submit" id="submitJournal" name="submitJournal" value="Journal"/>
         </div>
     </fieldset>
 
