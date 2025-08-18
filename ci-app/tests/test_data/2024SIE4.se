@@ -1,0 +1,962 @@
+#FLAGGA 0
+#FORMAT PC8
+#SIETYP 4
+#PROGRAM "Kapitas" 1.1
+#GEN 20250423
+#FNAMN "Testbolaget"
+#VALUTA SEK
+#RAR 0 20240101 20241231
+#KPTYP EUBAS97
+
+#KONTO 1312 "Aktier i onoterade svenska koncernf�retag"
+#KONTO 1380 "Andra l�ngfristiga fordringar"
+#KONTO 1385 "Kapitalf�rs�kring"
+#KONTO 1386 "F�rutbetalda leasingavgifter, l�ngfristig del"
+#KONTO 1430 "Lager av halvfabrikat"
+#KONTO 1431 "Lager av k�pta halvfabrikat"
+#KONTO 1432 "Lager av egentillverkade halvfabrikat"
+#KONTO 1438 "F�r�ndring av lager av k�pta halvfabrikat"
+#KONTO 1439 "F�r�ndring av lager av egentillverkade halvfabrikat"
+#KONTO 1510 "Kundfordringar"
+#KONTO 1515 "Os�kra kundfordringar"
+#KONTO 1535 "Os�kra kontraktsfordringar"
+#KONTO 1565 "Os�kra kundfordringar hos koncernf�retag"
+#KONTO 1580 "Fordringar f�r kontokort och kuponger"
+#KONTO 1630 "Avr�kning f�r skatter och avgifter (skattekonto)"
+#KONTO 1650 "Momsfordran"
+#KONTO 1662 "Kortfristiga fordringar hos dotterf�retag"
+#KONTO 1700 "F�rutbetalda kostnader/interimsfordringar"
+#KONTO 1869 "Nedskrivning av andelar i koncernf�retag"
+#KONTO 1910 "Kassa"
+#KONTO 1912 "Kassa 2"
+#KONTO 1913 "Kassa 3"
+#KONTO 1914 "Kassa 4"
+#KONTO 1920 "PlusGiro"
+#KONTO 1922 "PayPal"
+#KONTO 1930 "F�retagskonto"
+#KONTO 1931 "Sparkonto"
+#KONTO 1932 "Bokio F�retagskonto"
+#KONTO 1933 "Bokio F�retagskonto"
+#KONTO 1941 "Sparkonto SEB"
+#KONTO 1942 "Avanza Spar"
+#KONTO 2012 "Avr�kning f�r skatter och avgifter (skattekonto)"
+#KONTO 2030 "Eget kapital, del�gare 3"
+#KONTO 2033 "Egna uttag del�gare 3 (Handelsbolag)"
+#KONTO 2038 "�vriga egna ins�ttningar, del�gare 3"
+#KONTO 2039 "�rets resultat, del�gare 3"
+#KONTO 2040 "Eget kapital, del�gare 4"
+#KONTO 2043 "Egna uttag del�gare 4 (Handelsbolag)"
+#KONTO 2048 "�vriga egna ins�ttningar, del�gare 4"
+#KONTO 2049 "�rets resultat, del�gare 4"
+#KONTO 2081 "Aktiekapital"
+#KONTO 2091 "Balanserad vinst eller f�rlust"
+#KONTO 2098 "Vinst eller f�rlust fr�n f�reg�ende �r"
+#KONTO 2099 "�rets resultat"
+#KONTO 2110 "Periodiseringsfond vid 2010 �rs taxering"
+#KONTO 2111 "Periodiseringsfond vid 2011 �rs taxering"
+#KONTO 2112 "Periodiseringsfond vid 2012 �rs taxering"
+#KONTO 2113 "Periodiseringsfond vid 2013 �rs taxering"
+#KONTO 2125 "Periodiseringsfond 2022"
+#KONTO 2163 "Ers�ttningsfond mark"
+#KONTO 2180 "Obeskattade int�kter"
+#KONTO 2181 "Obeskattade upphovsmannaint�kter"
+#KONTO 2185 "Obeskattade skogsint�kter"
+#KONTO 2380 "Skuld f�r leasade tillg�ngar"
+#KONTO 2440 "Leverant�rsskulder"
+#KONTO 2611 "Utg�ende moms p� f�rs�ljning inom Sverige, 25%"
+#KONTO 2614 "Utg�ende moms omv�nd skattskyldighet, 25 %"
+#KONTO 2617 "Utg�ende moms omv�nd skattskyldighet varor och tj�nster i Sverige, 25 %"
+#KONTO 2627 "Utg�ende moms omv�nd skattskyldighet varor och tj�nster i Sverige, 12 %"
+#KONTO 2637 "Utg�ende moms omv�nd skattskyldighet varor och tj�nster i Sverige, 6 %"
+#KONTO 2640 "Ing�ende moms"
+#KONTO 2645 "Ber�knad ing�ende moms p� f�rv�rv fr�n utlandet"
+#KONTO 2650 "Redovisningskonto f�r moms"
+#KONTO 2661 "Reklamskatt"
+#KONTO 2668 "MOSS, moms"
+#KONTO 2669 "�vriga punktskatter"
+#KONTO 2710 "Personalskatt"
+#KONTO 2730 "Lagstadgade sociala avgifter och s�rskild l�neskatt"
+#KONTO 2731 "Avr�kning lagstadgade sociala avgifter"
+#KONTO 2890 "�vriga kortfristiga skulder"
+#KONTO 2893 "Skulder till n�rst�ende personer, kortfristig del"
+#KONTO 2998 "�vriga upplupna kostnader och f�rutbetalda int�kter"
+#KONTO 3011 "F�rs�ljning tj�nster inom Sverige, 25 % moms"
+#KONTO 3012 "F�rs�ljning tj�nster inom Sverige, 12 % moms"
+#KONTO 3013 "F�rs�ljning tj�nster inom Sverige, 6 % moms"
+#KONTO 3014 "F�rs�ljning tj�nster inom Sverige, momsfri"
+#KONTO 3041 "F�rs�ljn tj�nst 25% sv"
+#KONTO 3048 "F�rs�ljn tj�nst EG momsfri"
+#KONTO 3051 "F�rs�ljn varor 25% sv"
+#KONTO 3071 "F�rutbetalda int�kter, varor och tj�nster"
+#KONTO 3089 "F�rs�ljning inom Sverige, momsfri"
+#KONTO 3099 "Justering av f�rs�ljning, ej moms"
+#KONTO 3101 "F�rs�ljning av varor inom Sverige, 25% moms"
+#KONTO 3107 "Treparts f�rs�ljn varor till EU"
+#KONTO 3223 "Positiv VM omf�ringskonto"
+#KONTO 3301 "F�rs�ljning tj�nster inom Sverige, 25% moms"
+#KONTO 3389 "F�rs�ljning EU moms/MOSS"
+#KONTO 3521 "Fakturerade frakter, EU-land"
+#KONTO 3522 "Fakturerade frakter, export"
+#KONTO 3541 "Faktureringsavgifter, EU-land"
+#KONTO 3542 "Faktureringsavgifter, export"
+#KONTO 3740 "�res- och kronutj�mning"
+#KONTO 3929 "Kickback momsfri"
+#KONTO 3930 "P�minnelseavgifter"
+#KONTO 4010 "Ink�p material och varor"
+#KONTO 4101 "Ink�p I av handelsvaror A"
+#KONTO 4512 "F�rv�rv varor, trepartsf�rv�rv fr�n annat EU-land, mellan man"
+#KONTO 4531 "Ink�p av tj�nster fr�n ett land utanf�r EU, 25 % moms"
+#KONTO 4534 "Import tj�nster land utanf�r EU, momsfri"
+#KONTO 4535 "Ink�p av tj�nster fr�n annat EU-land, 25 % moms"
+#KONTO 4598 "Justering, omv�nd moms"
+#KONTO 4646 "Ink�p Tj�nster EU 25%"
+#KONTO 4930 "F�r�ndring av lager av halvfabrikat"
+#KONTO 4931 "F�r�ndring av lager av k�pta halvfabrikat"
+#KONTO 4932 "F�r�ndring av lager av egentillverkade halvfabrikat"
+#KONTO 4990 "F�r�ndring av lager och p�g�ende arbeten (of�rdelad)"
+#KONTO 5400 "F�rbrukningsinventarier och f�rbrukningsmaterial (gruppkonto)"
+#KONTO 5410 "F�rbrukningsinventarier"
+#KONTO 5460 "F�rbrukningsmaterial"
+#KONTO 5800 "Resekostnader (gruppkonto)"
+#KONTO 5841 "Milers�ttning, avdragsgill (�gare enskild firma)"
+#KONTO 5842 "Milers�ttning, ej avdragsgill (�gare enskild firma)"
+#KONTO 5843 "Traktamente Sverige avdragsgillt (�gare enskild firma)"
+#KONTO 5844 "Traktamente Sverige ej avdragsgillt (�gare enskild firma)"
+#KONTO 5845 "Traktamente Utlandet avdragsgillt (�gare enskild firma)"
+#KONTO 5846 "Traktamente Utlandet ej avdragsgillt (�gare enskild firma)"
+#KONTO 6200 "Tele och post (gruppkonto)"
+#KONTO 6212 "Mobiltelefon"
+#KONTO 6230 "Datakommunikation"
+#KONTO 6318 "Premier f�r pensionsf�rs�kringar"
+#KONTO 6319 "S�rskild l�neskatt p� pensionskostnader"
+#KONTO 6540 "IT-tj�nster"
+#KONTO 6541 "Programvaror utanf�r EU"
+#KONTO 6570 "Bankkostnader"
+#KONTO 7014 "L�ner till kollektivanst�llda (nya pensionssystemet)"
+#KONTO 7015 "L�ner till kollektivanst�llda (avgiftsbefriade)"
+#KONTO 7016 "Vinstandelar till kollektivanst�llda (avgiftsbefriade)"
+#KONTO 7033 "L�ner till kollektivanst�llda under 26 �r (utlandsanst�llda)"
+#KONTO 7034 "L�ner till kollektivanst�llda (nya pensionssystemet) (utlandsanst�llda)"
+#KONTO 7035 "L�ner till kollektivanst�llda (avgiftsbefriade) (utlandsanst�llda)"
+#KONTO 7036 "Vinstandelar till kollektivanst�llda (avgiftsbefriade) (utlandsanst�llda)"
+#KONTO 7214 "L�ner till tj�nstem�n (nya pensionssystemet)"
+#KONTO 7215 "L�ner till tj�nstem�n (avgiftsbefriade)"
+#KONTO 7216 "Vinstandelar till tj�nstem�n (avgiftsbefriade)"
+#KONTO 7223 "L�ner till f�retagsledare under 26 �r"
+#KONTO 7224 "L�ner till f�retagsledare (nya pensionssystemet)"
+#KONTO 7225 "L�ner till f�retagsledare (avgiftsbefriade)"
+#KONTO 7233 "L�ner till tj�nstem�n och ftgsledare under 26 �r (utlandsanst�llda)"
+#KONTO 7234 "L�ner till tj�nstem�n och ftgsledare (utlandsanst�llda) (nya pensionssystemet)"
+#KONTO 7235 "L�ner till tj�nstem�n och ftgsledare (utlandsanst�llda) (avgiftsbefriade)"
+#KONTO 7236 "Vinstandelar till tj�nstem�n och ftgsledare (utlandsanst�llda) (avgiftsbefriade)"
+#KONTO 7399 "Motkonto skattepliktiga f�rm�ner"
+#KONTO 7418 "�terb�ring fr�n f�rs�kringsf�retag"
+#KONTO 7421 "Direktpension, ej avdragsgill"
+#KONTO 7514 "Arbetsgivaravgift f�rsta anst�lld"
+#KONTO 7520 "Arbetsgivaravgifter (nya pensionssystemet)"
+#KONTO 7521 "Arbetsgivaravgifter f�r l�ner och ers�ttningar (nya pensionssystemet)"
+#KONTO 7522 "Arbetsgivaravgifter f�r f�rm�nsv�rden (nya pensionssystemet)"
+#KONTO 7525 "Arbetsgivaravgifter p� skattepliktiga kostnadsers�ttningar (nya pensionssystemet)"
+#KONTO 7526 "Arbetsgivaravgifter p� arvoden (nya pensionssystemet)"
+#KONTO 7528 "Arbetsgivaravgifter p� bruttol�neavdrag m.m. (nya pensionssystemet)"
+#KONTO 7529 "Arbetsgivaravgifter f�r semester- och l�neskulder (nya pensionssystemet)"
+#KONTO 8013 "Utdelning p� andelar i andra koncernf�retag"
+#KONTO 8014 "Koncernbidrag"
+#KONTO 8019 "�vriga utdelningar p� andelar i koncernf�retag"
+#KONTO 8023 "Resultat vid f�rs�ljning av andelar i andra koncernf�retag"
+#KONTO 8073 "Nedskrivningar av andelar i andra koncernf�retag"
+#KONTO 8078 "Nedskrivningar av l�ngfristiga fordringar hos andra koncernf�retag"
+#KONTO 8083 "�terf�ringar av nedskrivningar av andelar i andra koncernf�retag"
+#KONTO 8088 "�terf�ringar av nedskrivningar av l�ngfristiga fordringar hos andra koncernf�retag"
+#KONTO 8228 "V�rdef�r�ndring kapitalf�rs�kring, skattem�ssig justering"
+#KONTO 8250 "R�nteint�kter fr�n l�ngfristiga fordringar hos och v�rdepapper i andra f�retag"
+#KONTO 8274 "Nedskrivning Kapitalf�rs�kring"
+#KONTO 8296 "Uppskrivning Kapitalf�rs�kring"
+#KONTO 8314 "Skattefria r�nteint�kter"
+#KONTO 8398 "V�rdef�r�ndring kortfristig placering, skattem�ssig justering"
+#KONTO 8414 "R�ntekostnader f�r byggnadskreditiv"
+#KONTO 8416 "R�ntekostnad leasing"
+#KONTO 8460 "R�ntekostnader till koncernf�retag"
+#KONTO 8820 "Mottagna koncernbidrag"
+#KONTO 8863 "Avs�ttning till ers�ttningsfond f�r mark"
+#KONTO 8880 "F�r�ndring av obeskattade int�kter"
+#KONTO 8881 "Avs�ttning till upphovsmannakonto"
+#KONTO 8882 "�terf�ring fr�n upphovsmannakonto"
+#KONTO 8885 "Avs�ttning till skogskonto"
+#KONTO 8886 "�terf�ring fr�n skogskonto"
+#KONTO 8891 "F�r�ndring av skillnad mellan bokf�rd och faktisk pensionsskuld"
+#KONTO 8999 "�rets resultat"
+
+#IB 0 1312 25000.00
+#UB 0 1312 25000.00
+#IB 0 1380 366078.00
+#UB 0 1380 285194.00
+#IB 0 1385 0.00
+#UB 0 1385 50000.00
+#IB 0 1580 33.31
+#UB 0 1580 33.31
+#IB 0 1630 33220.00
+#UB 0 1630 43197.00
+#IB 0 1650 18651.00
+#UB 0 1650 14825.00
+#IB 0 1662 17768.00
+#UB 0 1662 47805.50
+#IB 0 1922 507.66
+#UB 0 1922 507.66
+#IB 0 1930 31618.20
+#UB 0 1930 36550.41
+#IB 0 1941 29.53
+#UB 0 1941 29.53
+#IB 0 1942 56.87
+#UB 0 1942 56.87
+#IB 0 2081 -50000.00
+#UB 0 2081 -50000.00
+#IB 0 2091 -422274.97
+#UB 0 2091 -412453.57
+#IB 0 2098 0.00
+#UB 0 2098 0.00
+#IB 0 2099 9821.40
+#UB 0 2099 -13307.16
+#IB 0 2614 0.00
+#UB 0 2614 0.00
+#IB 0 2640 0.00
+#UB 0 2640 0.00
+#IB 0 2645 0.00
+#UB 0 2645 0.00
+#IB 0 2650 -9750.30
+#UB 0 2650 -9750.30
+#IB 0 2710 1735.00
+#UB 0 2710 0.00
+#IB 0 2730 3008.00
+#UB 0 2730 0.00
+#IB 0 2731 -3009.45
+#UB 0 2731 0.00
+#IB 0 2890 -1077.00
+#UB 0 2890 0.00
+#IB 0 2893 -18346.25
+#UB 0 2893 -17688.25
+#IB 0 2998 -3069.00
+#UB 0 2998 0.00
+#RES 0 3740 0.50
+#RES 0 4531 0.00
+#RES 0 4535 7437.50
+#RES 0 5410 7113.60
+#RES 0 5460 1976.56
+#RES 0 6212 4348.80
+#RES 0 6230 7099.88
+#RES 0 6540 2134.00
+#RES 0 6570 1596.00
+#RES 0 8250 -16816.00
+#RES 0 8314 -778.00
+#RES 0 8820 -27420.00
+#RES 0 8999 13307.16
+
+
+#VER "V" "1" 20240101 "BOKIO /24-01-01 - IT-tj�nster"
+{
+#TRANS 1930 {} -1358.75
+#TRANS 2640 {} 271.75
+#TRANS 6540 {} 1087.00
+}
+
+#VER "V" "2" 20240106 "Int�ktsr�nta - Skattekonto Int�ktsr�nta - Aktiebolag"
+{
+#TRANS 1630 {} 71.00
+#TRANS 8314 {} -71.00
+}
+
+#VER "V" "3" 20240101 "Divergerande bankdagar"
+{
+#TRANS 1930 {} -3069.00
+#TRANS 2998 {} 3069.00
+}
+
+#VER "V" "4" 20240101 "Omf�ring vinst eller f�rlust fr�n tidigare �r"
+{
+#TRANS 2098 {} 9821.40
+#TRANS 2099 {} -9821.40
+}
+
+#VER "V" "5" 20240115 "Moms okt 2023 - dec 2023 - Skattekonto Moms till godo - Aktiebolag"
+{
+#TRANS 1630 {} 4734.00
+#TRANS 1650 {} -4734.00
+}
+
+#VER "V" "6" 20240203 "Int�ktsr�nta - Skattekonto Int�ktsr�nta - Aktiebolag"
+{
+#TRANS 1630 {} 63.00
+#TRANS 8314 {} -63.00
+}
+
+#VER "V" "7" 20240302 "Int�ktsr�nta - Skattekonto Int�ktsr�nta - Aktiebolag"
+{
+#TRANS 1630 {} 65.00
+#TRANS 8314 {} -65.00
+}
+
+#VER "V" "8" 20240116 "LOOPIA AB /24-01-15 - IT-produkter Inrikes"
+{
+#TRANS 1930 {} -236.25
+#TRANS 2640 {} 47.25
+#TRANS 6230 {} 189.00
+}
+
+#VER "V" "9" 20240122 "LOOPIA AB /24-01-21 - IT-produkter Inrikes"
+{
+#TRANS 1930 {} -1485.00
+#TRANS 2640 {} 297.00
+#TRANS 6230 {} 1188.00
+}
+
+#VER "V" "10" 20240306 "LOOPIA AB /24-03-05 - IT-produkter Inrikes"
+{
+#TRANS 1930 {} -273.75
+#TRANS 2640 {} 54.75
+#TRANS 6230 {} 219.00
+}
+
+#VER "V" "11" 20240125 "BANKTJ�NSTER - Banktj�nster"
+{
+#TRANS 1930 {} -133.00
+#TRANS 6570 {} 133.00
+}
+
+#VER "V" "12" 20240228 "BANKTJ�NSTER - Banktj�nster"
+{
+#TRANS 1930 {} -133.00
+#TRANS 6570 {} 133.00
+}
+
+#VER "V" "13" 20240201 "TELE2 SV AB F�RETAG ATTN - Mobiltelefon"
+{
+#TRANS 1930 {} -448.00
+#TRANS 2640 {} 89.60
+#TRANS 6212 {} 358.40
+}
+
+#VER "V" "14" 20240201 "3 (HI3G ACCESS AB) - Mobiltelefon"
+{
+#TRANS 1930 {} -60.00
+#TRANS 2640 {} 12.00
+#TRANS 6212 {} 48.00
+}
+
+#VER "V" "15" 20240228 "TELE2 SV AB F�RETAG ATTN - Mobiltelefon"
+{
+#TRANS 1930 {} -448.00
+#TRANS 2640 {} 89.60
+#TRANS 6212 {} 358.40
+}
+
+#VER "V" "16" 20240213 "LYSA SPAR"
+{
+#TRANS 1385 {} 25000.00
+#TRANS 1930 {} -25000.00
+}
+
+#VER "V" "17" 20240212 "SAVELEND"
+{
+#TRANS 1380 {} -12500.00
+#TRANS 1930 {} 12500.00
+}
+
+#VER "V" "18" 20240208 "SAVELEND"
+{
+#TRANS 1380 {} -24000.00
+#TRANS 1930 {} 24000.00
+}
+
+#VER "V" "19" 20240115 "�RSREDOVISNI/24-01-14 - Ink�p tj�nster inom EU 25%"
+{
+#TRANS 1930 {} -7437.50
+#TRANS 2614 {} -1859.38
+#TRANS 2645 {} 1859.38
+#TRANS 4535 {} 7437.50
+}
+
+#VER "V" "20" 20240401 "IT-produkter Inrikes"
+{
+#TRANS 1930 {} -1308.75
+#TRANS 2640 {} 261.75
+#TRANS 6230 {} 1047.00
+}
+
+#VER "V" "21" 20240402 "TELE2 SV AB F�RETAG ATTN - Mobiltelefon"
+{
+#TRANS 1930 {} -448.00
+#TRANS 2640 {} 89.60
+#TRANS 6212 {} 358.40
+}
+
+#VER "V" "22" 20240414 "LOOPIA AB /24-04-12 - IT-produkter Inrikes"
+{
+#TRANS 1930 {} -273.75
+#TRANS 2640 {} 54.75
+#TRANS 6230 {} 219.00
+}
+
+#VER "V" "23" 20240416 "LOOPIA AB /24-04-15 - IT-produkter Inrikes"
+{
+#TRANS 1930 {} -323.75
+#TRANS 2640 {} 64.75
+#TRANS 6230 {} 259.00
+}
+
+#VER "V" "24" 20240418 "LOOPIA AB /24-04-17 - IT-produkter Inrikes"
+{
+#TRANS 1930 {} -273.75
+#TRANS 2640 {} 54.75
+#TRANS 6230 {} 219.00
+}
+
+#VER "V" "25" 20240425 "BANKTJ�NSTER - Banktj�nster"
+{
+#TRANS 1930 {} -130.00
+#TRANS 6570 {} 130.00
+}
+
+#VER "V" "26" 20240406 "Int�ktsr�nta - Skattekonto Int�ktsr�nta - Aktiebolag"
+{
+#TRANS 1630 {} 82.00
+#TRANS 8314 {} -82.00
+}
+
+#VER "V" "27" 20240331 "Momsredovisning: januari 2024 - mars 2024"
+{
+#TRANS 1650 {} 862.00
+#TRANS 2614 {} 1859.38
+#TRANS 2640 {} -861.95
+#TRANS 2645 {} -1859.38
+#TRANS 3740 {} -0.05
+}
+
+#VER "V" "28" 20240429 "TELE2 SV AB F�RETAG ATTN - Mobiltelefon"
+{
+#TRANS 1930 {} -448.00
+#TRANS 2640 {} 89.60
+#TRANS 6212 {} 358.40
+}
+
+#VER "V" "29" 20240530 "TELE2 SV AB F�RETAG ATTN - Mobiltelefon"
+{
+#TRANS 1930 {} -448.00
+#TRANS 2640 {} 89.60
+#TRANS 6212 {} 358.40
+}
+
+#VER "V" "30" 20240509 "SIMPLY COM /24-05-08 - IT-produkter Inrikes"
+{
+#TRANS 1930 {} -189.60
+#TRANS 2640 {} 37.92
+#TRANS 6230 {} 151.68
+}
+
+#VER "V" "31" 20240508 "SIMPLY COM /24-05-07 - IT-produkter Inrikes"
+{
+#TRANS 1930 {} -1584.00
+#TRANS 2640 {} 316.80
+#TRANS 6230 {} 1267.20
+}
+
+#VER "V" "32" 20240527 "BANKTJ�NSTER - Banktj�nster"
+{
+#TRANS 1930 {} -136.00
+#TRANS 6570 {} 136.00
+}
+
+#VER "V" "33" 20240503 "LYSA SPAR"
+{
+#TRANS 1380 {} 6000.00
+#TRANS 1930 {} -6000.00
+}
+
+#VER "V" "34" 20240503 "LYSA SPAR"
+{
+#TRANS 1380 {} 12000.00
+#TRANS 1930 {} -12000.00
+}
+
+#VER "V" "35" 20240502 "SAVELEND"
+{
+#TRANS 1380 {} -6000.00
+#TRANS 1930 {} 6000.00
+}
+
+#VER "V" "36" 20240502 "SAVELEND"
+{
+#TRANS 1380 {} -12000.00
+#TRANS 1930 {} 12000.00
+}
+
+#VER "V" "37" 20240327 "BANKTJ�NSTER - Banktj�nster"
+{
+#TRANS 1930 {} -133.00
+#TRANS 6570 {} 133.00
+}
+
+#VER "V" "38" 20240628 "TELE2 SV AB F�RETAG ATTN - Mobiltelefon"
+{
+#TRANS 1930 {} -448.00
+#TRANS 2640 {} 89.60
+#TRANS 6212 {} 358.40
+}
+
+#VER "V" "39" 20240625 "BANKTJ�NSTER - Banktj�nster"
+{
+#TRANS 1930 {} -133.00
+#TRANS 6570 {} 133.00
+}
+
+#VER "V" "40" 20240621 "LOOPIA AB /24-06-20 - IT-produkter Inrikes"
+{
+#TRANS 1930 {} -273.75
+#TRANS 2640 {} 54.75
+#TRANS 6230 {} 219.00
+}
+
+#VER "V" "41" 20240702 "BOKIO /24-07-01 - IT-tj�nster"
+{
+#TRANS 1930 {} -1308.75
+#TRANS 2640 {} 261.75
+#TRANS 6540 {} 1047.00
+}
+
+#VER "V" "42" 20240504 "Int�ktsr�nta - Skattekonto Int�ktsr�nta - Aktiebolag"
+{
+#TRANS 1630 {} 67.00
+#TRANS 8314 {} -67.00
+}
+
+#VER "V" "43" 20240601 "Int�ktsr�nta - Skattekonto Int�ktsr�nta - Aktiebolag"
+{
+#TRANS 1630 {} 68.00
+#TRANS 8314 {} -68.00
+}
+
+#VER "V" "44" 20240706 "Int�ktsr�nta - Skattekonto Int�ktsr�nta - Aktiebolag"
+{
+#TRANS 1630 {} 80.00
+#TRANS 8314 {} -80.00
+}
+
+#VER "V" "45" 20240429 "Moms till godo - Skatteverket"
+{
+#TRANS 1630 {} 862.00
+#TRANS 1650 {} -862.00
+}
+
+#VER "V" "46" 20240630 "Momsredovisning: april 2024 - juni 2024"
+{
+#TRANS 1650 {} 1203.00
+#TRANS 2640 {} -1203.87
+#TRANS 3740 {} 0.87
+}
+
+#VER "V" "47" 20240803 "Int�ktsr�nta - Skattekonto Int�ktsr�nta - Aktiebolag"
+{
+#TRANS 1630 {} 52.00
+#TRANS 8314 {} -52.00
+}
+
+#VER "V" "48" 20240901 "Int�ktsr�nta - Skattekonto Int�ktsr�nta - Aktiebolag"
+{
+#TRANS 1630 {} 55.00
+#TRANS 8314 {} -55.00
+}
+
+#VER "V" "49" 20240718 "Moms till godo - Skatteverket"
+{
+#TRANS 1630 {} 1203.00
+#TRANS 1650 {} -1203.00
+}
+
+#VER "V" "50" 20240725 "BANKTJ�NSTER - Banktj�nster"
+{
+#TRANS 1930 {} -133.00
+#TRANS 6570 {} 133.00
+}
+
+#VER "V" "51" 20240828 "BANKTJ�NSTER - Banktj�nster"
+{
+#TRANS 1930 {} -130.00
+#TRANS 6570 {} 130.00
+}
+
+#VER "V" "52" 20240727 "LOOPIA AB /24-07-26 - IT-produkter Inrikes"
+{
+#TRANS 1930 {} -273.75
+#TRANS 2640 {} 54.75
+#TRANS 6230 {} 219.00
+}
+
+#VER "V" "53" 20240730 "LOOPIA AB /24-07-29 - IT-produkter Inrikes"
+{
+#TRANS 1930 {} -273.75
+#TRANS 2640 {} 54.75
+#TRANS 6230 {} 219.00
+}
+
+#VER "V" "54" 20240805 "TELE2 SV AB F�RETAG ATTN - Mobiltelefon"
+{
+#TRANS 1930 {} -448.00
+#TRANS 2640 {} 89.60
+#TRANS 6212 {} 358.40
+}
+
+#VER "V" "55" 20240820 "TELE2 SV AB F�RETAG ATTN - Mobiltelefon"
+{
+#TRANS 1930 {} -448.00
+#TRANS 2640 {} 89.60
+#TRANS 6212 {} 358.40
+}
+
+#VER "V" "56" 20240723 "GE-KAS /24-07-22 - Ink�p f�rbrukningsmaterial 25% moms"
+{
+#TRANS 1930 {} -359.40
+#TRANS 2640 {} 71.88
+#TRANS 5460 {} 287.52
+}
+
+#VER "V" "57" 20240806 "GOOGLE GOOG/24-08-06 - Ink�p f�rbrukningsinventarier 25% moms"
+{
+#TRANS 1930 {} -6902.00
+#TRANS 2640 {} 1380.40
+#TRANS 5410 {} 5521.60
+}
+
+#VER "V" "58" 20240822 "ELGIGANTEN S/24-08-21 - Ink�p f�rbrukningsinventarier 25% moms"
+{
+#TRANS 1930 {} -1990.00
+#TRANS 2640 {} 398.00
+#TRANS 5410 {} 1592.00
+}
+
+#VER "V" "59" 20240720 "COFFS HARBOU/24-07-20 - Ink�p Tj�nster utanf�r EU"
+{
+#TRANS 1930 {} -236.45
+#TRANS 2614 {} -59.11
+#TRANS 2645 {} 59.11
+#TRANS 4531 {} 236.45
+}
+
+#VER "V" "60" 20240831 "LAGUNA NIGUE/24-08-29 - Ink�p Tj�nster utanf�r EU"
+{
+#TRANS 1930 {} -936.59
+#TRANS 2614 {} -234.15
+#TRANS 2645 {} 234.15
+#TRANS 4531 {} 936.59
+}
+
+#VER "V" "61" 20240831 "Annullering av V60: LAGUNA NIGUE/24-08-29 - Ink�p Tj�nster utanf�r EU"
+{
+#TRANS 1930 {} 936.59
+#TRANS 2614 {} 234.15
+#TRANS 2645 {} -234.15
+#TRANS 4531 {} -936.59
+}
+
+#VER "V" "62" 20240720 "Annullering av V59: COFFS HARBOU/24-07-20 - Ink�p Tj�nster utanf�r EU"
+{
+#TRANS 1930 {} 236.45
+#TRANS 2614 {} 59.11
+#TRANS 2645 {} -59.11
+#TRANS 4531 {} -236.45
+}
+
+#VER "V" "63" 20240902 "Bokio �t Skattekonto"
+{
+#TRANS 1662 {} 1308.75
+#TRANS 1930 {} -1308.75
+}
+
+#VER "V" "64" 20240720 "COFFS HARBOU/24-07-20 - Ink�p f�rbrukningsmaterial 25% moms"
+{
+#TRANS 1930 {} -236.45
+#TRANS 5460 {} 236.45
+}
+
+#VER "V" "65" 20240831 "LAGUNA NIGUE/24-08-29 - Ink�p f�rbrukningsmaterial 25% moms"
+{
+#TRANS 1930 {} -936.59
+#TRANS 5460 {} 936.59
+}
+
+#VER "V" "66" 20240930 "Momsredovisning: juli 2024 - september 2024"
+{
+#TRANS 1650 {} 2400.00
+#TRANS 2640 {} -2400.73
+#TRANS 3740 {} 0.73
+}
+
+#VER "V" "67" 20241001 "IT-produkter Inrikes"
+{
+#TRANS 1930 {} -1308.75
+#TRANS 2640 {} 261.75
+#TRANS 6230 {} 1047.00
+}
+
+#VER "V" "68" 20241005 "Int�ktsr�nta - Skattekonto Int�ktsr�nta - Aktiebolag"
+{
+#TRANS 1630 {} 63.00
+#TRANS 8314 {} -63.00
+}
+
+#VER "V" "69" 20241102 "Int�ktsr�nta - Skattekonto Int�ktsr�nta - Aktiebolag"
+{
+#TRANS 1630 {} 55.00
+#TRANS 8314 {} -55.00
+}
+
+#VER "V" "70" 20241015 "Moms till godo - Skatteverket"
+{
+#TRANS 1630 {} 2400.00
+#TRANS 1650 {} -2400.00
+}
+
+#VER "V" "71" 20241201 "Int�ktsr�nta - Skattekonto Int�ktsr�nta - Aktiebolag"
+{
+#TRANS 1630 {} 57.00
+#TRANS 8314 {} -57.00
+}
+
+#VER "V" "72" 20241205 "LOOPIA AB - IT-produkter Inrikes"
+{
+#TRANS 1930 {} -273.75
+#TRANS 2640 {} 54.75
+#TRANS 6230 {} 219.00
+}
+
+#VER "V" "73" 20241207 "LOOPIA AB - IT-produkter Inrikes"
+{
+#TRANS 1930 {} -248.75
+#TRANS 2640 {} 49.75
+#TRANS 6230 {} 199.00
+}
+
+#VER "V" "74" 20241216 "TELE2 SV AB F�RETAG ATTN - Mobiltelefon"
+{
+#TRANS 1930 {} -448.00
+#TRANS 2640 {} 89.60
+#TRANS 6212 {} 358.40
+}
+
+#VER "V" "75" 20241227 "BANKTJ�NSTER - Banktj�nster"
+{
+#TRANS 1930 {} -136.00
+#TRANS 6570 {} 136.00
+}
+
+#VER "V" "76" 20241227 "POWER VASTER - Ink�p f�rbrukningsmaterial 25% moms"
+{
+#TRANS 1930 {} -645.00
+#TRANS 2640 {} 129.00
+#TRANS 5460 {} 516.00
+}
+
+#VER "V" "77" 20241230 "Uttag SAVELEND"
+{
+#TRANS 1380 {} -8600.00
+#TRANS 1930 {} 8600.00
+}
+
+#VER "V" "78" 20241230 "SAVELEND - Uttag Savelend"
+{
+#TRANS 1380 {} -7500.00
+#TRANS 1930 {} 7500.00
+}
+
+#VER "V" "79" 20241202 "BOKIO - IT-tj�nster"
+{
+#TRANS 1380 {} 1308.75
+#TRANS 1930 {} -1308.75
+}
+
+#VER "V" "80" 20240709 "Uttag Savelend"
+{
+#TRANS 1380 {} -11000.00
+#TRANS 1930 {} 11000.00
+}
+
+#VER "V" "81" 20240709 "Uttag Savelend"
+{
+#TRANS 1380 {} -4900.00
+#TRANS 1930 {} 4900.00
+}
+
+#VER "V" "82" 20240802 "Uttag Savelend"
+{
+#TRANS 1380 {} -2500.00
+#TRANS 1930 {} 2500.00
+}
+
+#VER "V" "83" 20240802 "Uttag Savelend"
+{
+#TRANS 1380 {} -1000.00
+#TRANS 1930 {} 1000.00
+}
+
+#VER "V" "84" 20241009 "Uttag Savelend"
+{
+#TRANS 1380 {} -3000.00
+#TRANS 1930 {} 3000.00
+}
+
+#VER "V" "85" 20241009 "Uttag Savelend"
+{
+#TRANS 1380 {} -4700.00
+#TRANS 1930 {} 4700.00
+}
+
+#VER "V" "86" 20241010 "Ins�ttning Lysa"
+{
+#TRANS 1380 {} 7000.00
+#TRANS 1930 {} -7000.00
+}
+
+#VER "V" "87" 20241106 "Mobiltelefon"
+{
+#TRANS 1930 {} -448.00
+#TRANS 2640 {} 89.60
+#TRANS 6212 {} 358.40
+}
+
+#VER "V" "88" 20241126 "Banktj�nster"
+{
+#TRANS 1930 {} -133.00
+#TRANS 6570 {} 133.00
+}
+
+#VER "V" "89" 20241113 "IT-produkter Inrikes"
+{
+#TRANS 1930 {} -273.75
+#TRANS 2640 {} 54.75
+#TRANS 6230 {} 219.00
+}
+
+#VER "V" "90" 20241128 "Mobiltelefon"
+{
+#TRANS 1930 {} -448.00
+#TRANS 2640 {} 89.60
+#TRANS 6212 {} 358.40
+}
+
+#VER "V" "91" 20240924 "Banktj�nster"
+{
+#TRANS 1930 {} -136.00
+#TRANS 6570 {} 136.00
+}
+
+#VER "V" "92" 20241002 "Mobiltelefon"
+{
+#TRANS 1930 {} -448.00
+#TRANS 2640 {} 89.60
+#TRANS 6212 {} 358.40
+}
+
+#VER "V" "93" 20241025 "Banktj�nster"
+{
+#TRANS 1930 {} -130.00
+#TRANS 6570 {} 130.00
+}
+
+#VER "V" "94" 20240503 "Annullering av V33: LYSA SPAR"
+{
+#TRANS 1380 {} -6000.00
+#TRANS 1930 {} 6000.00
+}
+
+#VER "V" "95" 20240503 "LYSA SPAR"
+{
+#TRANS 1385 {} 6000.00
+#TRANS 1930 {} -6000.00
+}
+
+#VER "V" "96" 20240503 "Annullering av V34: LYSA SPAR"
+{
+#TRANS 1380 {} -12000.00
+#TRANS 1930 {} 12000.00
+}
+
+#VER "V" "97" 20240503 "LYSA SPAR"
+{
+#TRANS 1385 {} 12000.00
+#TRANS 1930 {} -12000.00
+}
+
+#VER "V" "98" 20241010 "Annullering av V86: Ins�ttning Lysa"
+{
+#TRANS 1380 {} -7000.00
+#TRANS 1930 {} 7000.00
+}
+
+#VER "V" "99" 20241010 "Ins�ttning Lysa"
+{
+#TRANS 1385 {} 7000.00
+#TRANS 1930 {} -7000.00
+}
+
+#VER "V" "100" 20241202 "Annullering av V79: BOKIO - IT-tj�nster"
+{
+#TRANS 1380 {} -1308.75
+#TRANS 1930 {} 1308.75
+}
+
+#VER "V" "101" 20241202 "BOKIO - IT-tj�nster"
+{
+#TRANS 1662 {} 1308.75
+#TRANS 1930 {} -1308.75
+}
+
+#VER "V" "102" 20241231 "Erh�llet koncernbidrag"
+{
+#TRANS 1662 {} 27420.00
+#TRANS 8820 {} -27420.00
+}
+
+#VER "V" "103" 20241231 "Momsredovisning: oktober 2024 - december 2024"
+{
+#TRANS 1650 {} 908.00
+#TRANS 2640 {} -908.40
+#TRANS 3740 {} 0.40
+}
+
+#VER "V" "104" 20241231 "Bokslut Anl�ggningstillg�ngar"
+{
+#TRANS 1380 {} 16816.00
+#TRANS 8250 {} -16816.00
+}
+
+#VER "V" "105" 20241231 "Flytta av kort skuld"
+{
+#TRANS 2890 {} 1077.00
+#TRANS 2893 {} -1077.00
+}
+
+#VER "V" "106" 20241231 "St�da korta skulder"
+{
+#TRANS 2730 {} -3008.00
+#TRANS 2731 {} 3009.45
+#TRANS 3740 {} -1.45
+}
+
+#VER "V" "107" 20241231 "St�da gamml felbokad personalskatt"
+{
+#TRANS 2710 {} -1735.00
+#TRANS 2893 {} 1735.00
+}
+
+#VER "V" "108" 20241231 "Vinst eller f�rlust fr�n f�reg�ende �r"
+{
+#TRANS 2098 {} -9821.40
+#TRANS 2091 {} 9821.40
+}
+
+#VER "V" "109" 20241231 "�rets resultat"
+{
+#TRANS 2099 {} -13307.16
+#TRANS 8999 {} 13307.16
+}
+
+
+

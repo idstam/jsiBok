@@ -324,7 +324,7 @@ class Sie extends BaseController
         foreach ($doc->Series as $name => $count) {
             if ($mappings[$name] == $name) {
                 foreach($this->bookingYears as $year => $data ) {
-                    $vs->ensureVoucherSeries($companyID, $name, $name . ' importerad', $year);
+                    $vs->ensureVoucherSeries($companyID, $name, $name . ' importerad', $data['dbID']);
                 }
             }
         }

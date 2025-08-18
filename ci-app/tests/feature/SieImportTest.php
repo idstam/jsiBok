@@ -116,5 +116,29 @@ final class SieImportTest extends CIUnitTestCase
         // Make sure the count is as expected
         //$this->assertCount(3, $objects);
     }
+    public function test2024SIE4(): void
+    {
+        $this->setupUser();
+        $this->session['sieTempFile'] = 'tests/test_data/2024SIE4.se';
+
+        $data = [
+            'sie_rar-0' => '1',
+            'sie_serie-V' => 'V',
+            'to_new_company'=> '1',
+        ];
+
+        $result = $this->withSession($this->session)->post('sie/import', $data);
+
+
+
+        $this->seeInDatabase('companies', ['name'=> 'Testbolaget']);
+        $this->seeInDatabase('journal', ['user_id'=>$this->userID, 'title'=> 'Nytt företag från SIE-fil']);
+
+
+        // Get every row created by ExampleSeeder
+
+        // Make sure the count is as expected
+        //$this->assertCount(3, $objects);
+    }
 
 }
