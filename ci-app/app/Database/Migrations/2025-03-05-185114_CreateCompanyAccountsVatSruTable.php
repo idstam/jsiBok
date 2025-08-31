@@ -14,10 +14,6 @@ class CreateCompanyAccountsVatSruTable extends Migration
                 'unsigned' => true,
                 'auto_increment' => true,
             ],
-            'calendar_year' => [
-                'type' => 'INT',
-                'unsigned' => true,
-            ],
             'company_id' => [
                 'type' => 'INT',
                 'unsigned' => true,
@@ -51,7 +47,7 @@ class CreateCompanyAccountsVatSruTable extends Migration
 
         ]);
         $this->forge->addPrimaryKey(['id']);
-        $this->forge->addUniqueKey(['company_id', 'account_id', 'calendar_year'], 'company_account_vat_sru_UDX');
+        $this->forge->addUniqueKey(['company_id', 'account_id'], 'company_account_vat_sru_UDX');
         $this->forge->createTable('company_account_vat_sru');
     }
 

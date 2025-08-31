@@ -82,4 +82,27 @@ window.onload = function(){
         });
     }
 
+    // Accounts page (Kontoplan) add/remove row logic moved from view to here
+    const addBtn = document.getElementById('add-row');
+    const tbody = document.getElementById('account-rows');
+    const tpl = document.getElementById('row-template');
+    if (addBtn && tbody && tpl) {
+        let newIdx = 0;
+        function bindRemove(btn){
+            btn.addEventListener('click', function(){
+                const tr = this.closest('tr');
+                if(tr) tr.remove();
+            });
+        }
+        addBtn.addEventListener('click', function(){
+            const html = tpl.innerHTML.replaceAll('__NAME__', 'rows[new' + (newIdx++) + ']');
+            const temp = document.createElement('tbody');
+            temp.innerHTML = html.trim();
+            const tr = temp.firstElementChild;
+            tbody.appendChild(tr);
+            const rmBtn = tr.querySelector('.remove-row');
+            if(rmBtn) bindRemove(rmBtn);
+        });
+        document.querySelectorAll('.remove-row').forEach(bindRemove);
+    }
 }
