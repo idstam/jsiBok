@@ -105,4 +105,28 @@ window.onload = function(){
         });
         document.querySelectorAll('.remove-row').forEach(bindRemove);
     }
+
+    // Dimensions page add/remove row
+    const addDimBtn = document.getElementById('add-dim-row');
+    const dimTbody = document.getElementById('dim-rows');
+    const dimTpl = document.getElementById('dim-row-template');
+    if (addDimBtn && dimTbody && dimTpl) {
+        let idx = 0;
+        function bindRemoveDim(btn){
+            btn.addEventListener('click', function(){
+                const tr = this.closest('tr');
+                if (tr) tr.remove();
+            });
+        }
+        addDimBtn.addEventListener('click', function(){
+            const html = dimTpl.innerHTML.replaceAll('__NAME__', 'rows[new' + (idx++) + ']');
+            const temp = document.createElement('tbody');
+            temp.innerHTML = html.trim();
+            const tr = temp.firstElementChild;
+            dimTbody.appendChild(tr);
+            const rm = tr.querySelector('.remove-dim-row');
+            if (rm) bindRemoveDim(rm);
+        });
+        document.querySelectorAll('.remove-dim-row').forEach(bindRemoveDim);
+    }
 }

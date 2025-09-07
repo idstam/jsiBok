@@ -26,8 +26,12 @@ $icons = new \Feather\IconManager();
                     <option value="<?=$year->id ?>"  <?= esc($year->active) == 1 ? 'selected' : '' ?>><?= date_format(date_create(esc($year->year_start)), 'Y-m-d') ?></option>
                 <?php } ?>
             </select>
+            <div class="grid">
             <strong><a href="/voucher/incoming-balance">Ingående balanser</a></strong>
             <strong><a href="/company/accounts">Kontoplan</a></strong>
+            <strong><a href="/company/dimensions?type=kostnadsstalle">Kostnadsställen</a></strong>
+            <strong><a href="/company/dimensions?type=project">Projekt</a></strong>
+            </div>
         </div>
             <label for="new_booking_year_start">Nytt bokföringsår</label>
         <div class="grid">
