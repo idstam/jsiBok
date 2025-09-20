@@ -298,7 +298,7 @@ class Voucher extends BaseController
      * @param string $voucherAmount The base amount for the voucher
      * @return string The calculated amount
      */
-    private function convertTemplateAmount(string $templateAmount, string $voucherAmount): string
+    private function convertTemplateAmount(string $templateAmount, string $voucherAmount, bool $withFormat=true): string
     {
         // Check if the template amount starts with a %
         if (str_starts_with($templateAmount, '%')) {
@@ -306,11 +306,19 @@ class Voucher extends BaseController
             $percentageValue = substr($templateAmount, 1);
             // Calculate the amount: voucherAmount * percentageValue / 100
             $ret = bcdiv(bcmul($voucherAmount, $percentageValue, 4), '100', 2);
-            return $this->format_bc($ret);
+            if($withFormat) {
+                return $this->format_bc($ret);
+            } else{
+                return $ret;
+            }
         }
 
         // If not a percentage, use the template amount directly
-        return $this->format_bc($templateAmount);
+        if($withFormat) {
+            $this->format_bc($templateAmount);
+        } else{
+            return $templateAmount;
+        }
     }
 
     public function postUse_template()
@@ -362,11 +370,14 @@ class Voucher extends BaseController
             // Calculate amount based on template row and tamount
             if (!empty($templateRow->debet_amount)) {
                 // Convert the template amount to a voucher amount
-                $amount = $this->convertTemplateAmount($templateRow->debet_amount, $tamount);
+                $amount = $this->convertTemplateAmount($templateRow->debet_amount, $tamount, false);
                 $vr->amount = $amount;
             } else if (!empty($templateRow->kredit_amount)) {
                 // Convert the template amount to a voucher amount (negative)
-                $amount = $this->convertTemplateAmount($templateRow->kredit_amount, $tamount);
+                //d($tamount);
+                //d($templateRow->kredit_amount);
+                $amount = $this->convertTemplateAmount($templateRow->kredit_amount, $tamount, false);
+                //dd($amount);
                 $vr->amount = bcmul($amount, '-1', 2);
             }
 

@@ -82,9 +82,9 @@ function level2sum($title, $in_amount_sum2, $p_amount_sum2, $ut_amount_sum2): vo
         $ut_amount = bcadd($in_amount, $p_amount, 2);
 
 
-        //        $amount = bcmul($row->amount, '1', 2);
-//        $debet = bcmul($row->debet, '1', 2);
-//        $kredit = bcmul($row->kredit, '1', 2);
+        //$amount = bcmul($row->amount, '1', 2);
+        //$debet = bcmul($row->debet, '1', 2);
+        //$kredit = bcmul($row->kredit, '1', 2);
 
         if ($lastLevel1 != $row->level1) {
             if ($lastLevel2 != '') {
@@ -187,13 +187,13 @@ function level2sum($title, $in_amount_sum2, $p_amount_sum2, $ut_amount_sum2): vo
             <h3 class="bold" >Totalt resultat</h3>
         </td>
         <td class="number">
-            <h3 class="bold  "><?= format_bc($in_amount_sum0) ?></h3>
+            <h3 class="bold"><?= format_bc($in_amount_sum0) ?></h3>
         </td>
         <td class="number">
-            <h3 class="bold  "><?= format_bc($p_amount_sum0) ?></h3>
+            <h3 class="bold"><?= format_bc($p_amount_sum0) ?></h3>
         </td>
         <td class="number">
-            <h3 class="bold "><?= format_bc($ut_amount_sum0) ?></h3>
+            <h3 class="bold"><?= format_bc($ut_amount_sum0) ?></h3>
         </td>
     </tr>
 
