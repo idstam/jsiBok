@@ -146,6 +146,109 @@ class Company extends BaseController
 
         return redirect()->to('/company/accounts');
     }
+
+    public function getDimensions()
+    {
+        if ($this->session->get('userID') == null) {
+            return redirect()->to('/');
+        }
+        if ($this->session->get('companyID') == null) {
+            return redirect()->to('/company');
+        }
+        $companyId = (int)$this->session->get('companyID');
+        $type = $this->request->getGet('type') ?? 'kostnadsstalle';
+        $dimNumber = ($type === 'project') ? 2 : 1; // 1=Kostnadsställe, 2=Project
+
+        $model = model('App\\Models\\CompanyDimensionsModel');
+        $perPage = 25;
+        $page = max(1, (int)($this->request->getGet('page') ?? 1));
+        $offset = ($page - 1) * $perPage;
+        $total = $model->countByCompanyAndType($companyId, $dimNumber);
+        $totalPages = max(1, (int)ceil($total / $perPage));
+        if ($page > $totalPages) {
+            $page = $totalPages;
+            $offset = ($page - 1) * $perPage;
+        }
+        $rows = $model->getByCompanyAndType($companyId, $dimNumber, $perPage, $offset);
+
+        $data = [
+            'title' => 'Dimensioner',
+            'description' => '',
+            'rows' => $rows,
+            'page' => $page,
+            'perPage' => $perPage,
+            'total' => $total,
+            'totalPages' => $totalPages,
+            'type' => $type,
+            'dimNumber' => $dimNumber,
+        ];
+
+        echo view('common/header', $data);
+        echo view('company/dimensions', $data);
+        echo view('common/footer');
+        return '';
+    }
+
+    public function postDimensions()
+    {
+        if ($this->session->get('userID') == null) {
+            return redirect()->to('/');
+        }
+        if ($this->session->get('companyID') == null) {
+            return redirect()->to('/company');
+        }
+        $companyId = (int)$this->session->get('companyID');
+        $type = $this->request->getGet('type') ?? ($this->request->getPost('type') ?? 'kostnadsstalle');
+        $dimNumber = ($type === 'project') ? 2 : 1;
+
+        $post = $this->request->getPost();
+        $rows = $post['rows'] ?? [];
+        $deletes = $post['deletes'] ?? [];
+
+        $model = model('App\\Models\\CompanyDimensionsModel');
+        $db = \Config\Database::connect();
+        $db->transStart();
+
+        // Deletions (soft)
+        foreach ($deletes as $id) {
+            $id = (int)$id;
+            if ($id > 0) {
+                $model->where('company_id', $companyId)->where('dim_number', $dimNumber)->where('id', $id)->delete();
+            }
+        }
+
+        // Upserts
+        foreach ($rows as $key => $row) {
+            $id = isset($row['id']) ? (int)$row['id'] : 0;
+            $code = isset($row['dim_code']) && $row['dim_code'] !== '' ? (int)$row['dim_code'] : null;
+            $title = trim($row['title'] ?? '');
+
+            // Skip invalid
+            if ($code === null && $id === 0) {
+                continue;
+            }
+
+            if ($id > 0) {
+                // Update
+                $model->update($id, [
+                    'dim_code' => $code,
+                    'title' => $title,
+                ]);
+            } else {
+                // Insert
+                $model->insert([
+                    'company_id' => $companyId,
+                    'dim_number' => $dimNumber,
+                    'dim_code' => $code ?? 0,
+                    'title' => $title,
+                ]);
+            }
+        }
+
+        $db->transComplete();
+
+        return redirect()->to('/company/dimensions?type=' . $type);
+    }
     public function getIndex($cno = "")
     {
         helper('jsi_helper');
