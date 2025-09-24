@@ -105,11 +105,14 @@ class Reports extends BaseController
         $data['reportQuery'] = $reportQuery->getResult('object');
         $data['fromDate'] = $fromDate;
         $data['toDate'] = $toDate;
+        $data['orgNr'] = $this->session->get('orgNo');
         $data['accountNames'] = $accountNameMap;
 
         echo view('common/header', $data);
         echo view('reports/header', $data);
         echo view('reports/moms', $data);
+        echo view('reports/moms-xml', $data);
+        echo "</div>";
         echo view('common/footer', $data);
         return '';
     }

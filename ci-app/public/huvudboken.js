@@ -81,6 +81,12 @@ window.onload = function(){
             new_voucher_row();
         });
     }
+    el = document.getElementById('btnDownloadTextData')
+    if(el) {
+        el.addEventListener('click', (e) => {
+            downloadTextFile();
+        });
+    }
 
     // Accounts page (Kontoplan) add/remove row logic moved from view to here
     const addBtn = document.getElementById('add-row');
@@ -129,4 +135,15 @@ window.onload = function(){
         });
         document.querySelectorAll('.remove-dim-row').forEach(bindRemoveDim);
     }
+}
+
+
+function downloadTextFile() {
+    var text = document.getElementById("textData").value;
+    var filename = document.getElementById("textDataFileName").value;
+    var blob = new Blob([text], { type: 'text/plain' });
+    var link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = filename;
+    link.click();
 }

@@ -208,9 +208,8 @@ $ruta[49] = $ruta[48] + $ruta[60] + $ruta[61] + $ruta[62] + $ruta[30] + $ruta[31
     <tr>
         <td>49</td>
         <td>Moms att betala (+) eller att få tillbaka (-)</td>
-        <td class="number"><?= format_bc($ruta[49]) ?></td>
+        <td class="number"><?= format_bc(-$ruta[49]) ?></td>
     </tr>
     </tbody>
 </table>
 
-</div>

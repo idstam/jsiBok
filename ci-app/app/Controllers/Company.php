@@ -277,11 +277,10 @@ class Company extends BaseController
 
                 if ($c->number === $cno || count($companies)== 1) {
                     //Write to the session only if we are changing selected company
-
                     //TODO:Use enforce date for booking year
-
                     $this->session->set('companyID', $c->id);
-                    $this->session->set('companyNumber', $cno);
+                    $this->session->set('companyNumber', $c->number);
+                    $this->session->set('orgNo', $c->org_no);
                     $this->session->set('companyName', $c->name);
                     $this->session->set('role', $c->user_role);
                     //return redirect()->to("/voucher");
