@@ -72,7 +72,7 @@ $radRubriker = [
     foreach($rutor as $ruta => $amount ) {
         if(array_key_exists(intval($ruta), $radRubriker) && $amount != "0") {
             $no = str_pad($ruta, 2, "0", STR_PAD_LEFT) . ".";
-            $rutaValue = '<' . $radRubriker[intval($ruta)] . '>' . $amount . '<' . $radRubriker[intval($ruta)] . '>';
+            $rutaValue = '<' . $radRubriker[intval($ruta)] . '>' . $amount . '</' . $radRubriker[intval($ruta)] . '>';
 
             $data .= $rutaValue . "\n";
         }
